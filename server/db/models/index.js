@@ -2,6 +2,7 @@ const User = require('./user')
 const Product = require('./product')
 const Order = require('./order')
 const Address = require('./address')
+const sequelize = require('sequelize')
 
 User.hasMany(Order)
 Order.belongsTo(User)
@@ -9,7 +10,7 @@ Order.belongsTo(User)
 const Order_Product = sequelize.define(
   'Order_Product',
   {
-    quantity: SEQUELIZE.Integer,
+    quantity: SEQUELIZE.Integer
   },
   {timestamps: false}
 )
@@ -19,7 +20,7 @@ Order.belongsToMany(Product, {through: Order_Product})
 const User_Address = sequelize.define(
   'User_Address',
   {
-    type: SEQUELIZE.ENUM(['billing', 'shipping']),
+    type: SEQUELIZE.ENUM(['billing', 'shipping'])
   },
   {timestamps: false}
 )
@@ -43,5 +44,5 @@ module.exports = {
   User,
   Product,
   Order,
-  Address,
+  Address
 }
