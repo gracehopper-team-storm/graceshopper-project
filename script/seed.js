@@ -12,15 +12,15 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  console.log(`ed ${users.length} users`)
+  console.log(`ed successfully`)
 }
 
-// We've separated the `seed` function from the `runSeed` function.
+// We've separated the `` function from the `run` function.
 // This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
+// The `` function is concerned only with modifying the database.
 async function runSeed() {
-  console.log('seeding...')
+  console.log('ing...')
   try {
     await seed()
   } catch (err) {
@@ -33,12 +33,12 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
+// Execute the `` function, IF we ran this module directly (`node `).
 // `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
+// any errors that might occur inside of ``.
 if (module === require.main) {
-  runSeed()
+  run()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
+// we export the  function for testing purposes (see `./.spec.js`)
 module.exports = seed

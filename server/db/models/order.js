@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('orders', {
-  session_id: {
+  sessionId: {
     type: Sequelize.STRING
   },
   status: {
