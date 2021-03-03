@@ -12,7 +12,7 @@ const Product = db.define('product', {
     defaultValue: 'A full description is comming soon.',
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     allowNull: false,
   },
   image: {
