@@ -1,19 +1,89 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Order, Address, Product} = require('../server/db/models')
+const faker = require('faker')
 
-async function seed() {
+async function seedUsers() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  for (let i = 0; i < 10; i++) {
+    let firstName = faker.name.firstName()
+    let lastName = faker.name.lastName()
+    let email = faker.internet.email()
+    let password = faker.internet.password()
 
-  console.log(`ed ${users.length} users`)
-  console.log(`ed successfully`)
+    await User.create({
+      firstName,
+      lastName,
+      email,
+      password
+    })
+  }
+
+  console.log(`seeded 10 users`)
+  console.log(`seeded successfully`)
+}
+
+async function seedAddresses() {
+  // await db.sync({force: true})
+  // console.log('db synced!')
+
+  for (let i = 0; i < 10; i++) {
+    let streetAddress = faker.address.streetAddress()
+    let city = faker.address.city()
+    let state = faker.address.state()
+    let zip = faker.address.zipCode()
+
+    await Address.create({
+      streetAddress,
+      city,
+      state,
+      zip
+    })
+  }
+
+  console.log(`seeded 10 addresses`)
+  console.log(`seeded successfully`)
+}
+
+// async function joinUserAddress(userId, addressId) {
+//   // find the user & address
+//   const user = await User.findOne({ where: { id: userId } });
+//   const address = await Address.findOne({ where: { id: addressId } });
+//   // add address and user to the join table with the custom method:
+//   address.addUser(user);
+// }
+
+// async function associatesUserAddress(){
+//   for(let i = 0; i < 10; i++){
+//     await joinUserAddress(i, 4)
+//   }
+// }
+
+async function seedProducts() {
+  // await db.sync({force: true})
+  // console.log('db synced!')
+
+  for (let i = 0; i < 25; i++) {
+    let name = faker.commerce.productName()
+    let description = faker.commerce.productDescription()
+    let image = faker.image.nature()
+    let price = faker.commerce.price(1, 100, 2)
+    let inventory = faker.random.number()
+
+    await Product.create({
+      name,
+      description,
+      image,
+      price,
+      inventory
+    })
+  }
+
+  console.log(`seeded 25 products`)
+  console.log(`seeded successfully`)
 }
 
 // We've separated the `` function from the `run` function.
@@ -22,7 +92,10 @@ async function seed() {
 async function runSeed() {
   console.log('ing...')
   try {
-    await seed()
+    await seedUsers()
+    await seedAddresses()
+    await seedProducts()
+    //await associatesUserAddress()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
@@ -40,5 +113,5 @@ if (module === require.main) {
   runSeed()
 }
 
-// we export the  function for testing purposes (see `./.spec.js`)
-module.exports = seed
+// we export the seed function for testing purposes (see `./seed.spec.js`)
+module.exports = {seedAddresses, seedUsers}
