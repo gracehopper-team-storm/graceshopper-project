@@ -10,4 +10,4 @@ const Order = db.define('orders', {
   }
 })
 
-module.export = Order
+module.exports = Order
