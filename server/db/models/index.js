@@ -2,25 +2,26 @@ const User = require('./user')
 const Product = require('./product')
 const Order = require('./order')
 const Address = require('./address')
-const sequelize = require('sequelize')
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 User.hasMany(Order)
 Order.belongsTo(User)
 
-const Order_Product = sequelize.define(
+const Order_Product = db.define(
   'Order_Product',
   {
-    quantity: SEQUELIZE.Integer
+    quantity: Sequelize.INTEGER
   },
   {timestamps: false}
 )
 Product.belongsToMany(Order, {through: Order_Product})
 Order.belongsToMany(Product, {through: Order_Product})
 
-const User_Address = sequelize.define(
+const User_Address = db.define(
   'User_Address',
   {
-    type: SEQUELIZE.ENUM(['billing', 'shipping'])
+    type: Sequelize.ENUM(['billing', 'shipping'])
   },
   {timestamps: false}
 )
