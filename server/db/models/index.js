@@ -41,4 +41,7 @@ Address.belongsToMany(User, {through: User_Address})
  */
 module.exports = {
   User,
+  Product,
+  Order,
+  Address,
 }
