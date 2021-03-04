@@ -11,7 +11,7 @@ const Product = db.define('product', {
     allowNull: false,
     defaultValue: 'A full description is comming soon.'
   },
-  price: {
+  price: { // are they any extra validations we could add here?
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false
   },
@@ -21,7 +21,7 @@ const Product = db.define('product', {
     defaultValue:
       'https://c.i.etsystatic.com/19586643/r/il/afd3d5/2705948432/il_1588xN.2705948432_omh6.jpg'
   },
-  inventory: {
+  inventory: { // any extra validations?
     type: Sequelize.INTEGER,
     allowNull: false
   }

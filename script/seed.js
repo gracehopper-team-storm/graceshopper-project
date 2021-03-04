@@ -1,5 +1,7 @@
 'use strict'
 
+// nice use of faker! Don't forget to remove commented out code before merging into the main branch
+
 const db = require('../server/db')
 const {User, Order, Address, Product} = require('../server/db/models')
 const faker = require('faker')
