@@ -4,7 +4,7 @@ import axios from 'axios'
 const SET_PRODUCTS = 'SET_PRODUCTS'
 
 // action creator
-const setProduct = products => ({
+const setProducts = products => ({
   type: SET_PRODUCTS,
   products
 })
@@ -14,23 +14,21 @@ const setProduct = products => ({
 //NOTE: PLEASE check if the route path is correct
 export const getProducts = () => async dispatch => {
   try {
-    const {data} = await axios.get('/allproducts')
-    dispatch(setProduct(data))
+    const products = await axios.get('/api/allproducts')
+    dispatch(setProducts(products.data))
   } catch (error) {
     console.error(error)
   }
 }
 
 //reducer
-
 //NOTE: PLEASE check if the initial state would be [] or {}
 const initialState = []
 
 const allProductsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCTS:
-      return action.products
-
+      return [...action.products]
     default:
       return state
   }
