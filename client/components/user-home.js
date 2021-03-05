@@ -11,7 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, (name here){name}!</h3>
+      <h3>Welcome, {name}!</h3>
       <img
         src="https://c.i.etsystatic.com/19586643/r/il/afd3d5/2705948432/il_1588xN.2705948432_omh6.jpg"
         width="500px"
