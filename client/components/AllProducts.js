@@ -13,7 +13,7 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div>
-        <h1>Plant Babies</h1>
+        <h1>Live Plants</h1>
         {this.props.products.map(product => {
           return (
             <div key={product.id}>
