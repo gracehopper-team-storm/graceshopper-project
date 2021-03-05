@@ -11,10 +11,9 @@ class AllProducts extends React.Component {
   comppnentDidUpdate() {}
 
   render() {
-    console.log(this.props.products)
     return (
       <div>
-        <h1>Plant Heaven</h1>
+        <h1>Plant Babies</h1>
         {this.props.products.map(product => {
           return (
             <div key={product.id}>
