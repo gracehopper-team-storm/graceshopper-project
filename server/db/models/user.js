@@ -7,7 +7,6 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
@@ -15,14 +14,13 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
   username: {
     type: Sequelize.STRING,
     validate: {
-      isAlpha: true,
+      isAlphanumeric: true,
       notEmpty: true
     }
   },

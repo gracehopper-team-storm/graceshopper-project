@@ -6,7 +6,6 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: true,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
@@ -14,7 +13,6 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: true,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
@@ -27,7 +25,6 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
@@ -35,7 +32,6 @@ const Address = db.define('address', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
       notEmpty: true
     }
   },
