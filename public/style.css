@@ -19,3 +19,42 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* pagenation */
+.pagination {
+  display: flex;
+  list-style: none;
+  cursor: pointer;
+}
+
+.pagination > .active > a {
+  background-color: #de9a47;
+  border-color: #de9a47;
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid #de9a47;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #de9a47;
+  border-color: #de9a47;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #de9a47;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}

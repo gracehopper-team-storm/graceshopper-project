@@ -2,20 +2,44 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getProducts} from '../store/allProducts'
+import ReactPaginate from 'react-paginate'
 
 class AllProducts extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      offset: 0,
+      currentPage: 0,
+      postPerPage: 10
+    }
+    this.handlePageClick = this.handlePageClick.bind(this)
+  }
   componentDidMount() {
     this.props.getProducts()
   }
 
   comppnentDidUpdate() {}
 
+  handlePageClick(e) {
+    const selectedPage = e.selected
+    this.setState({
+      currentPage: selectedPage,
+      offset: this.state.currentPage * this.state.postPerPage
+    })
+  }
   render() {
-    console.log(this.props.products)
+    const currentPosts = this.props.products.slice(
+      this.state.offset,
+      this.state.offset + this.state.postPerPage
+    )
+    let pageCount = Math.ceil(
+      this.props.products.length / this.state.postPerPage
+    )
+
     return (
       <div>
         <h1>Plant Heaven</h1>
-        {this.props.products.map(product => {
+        {currentPosts.map(product => {
           return (
             <div key={product.id}>
               <Link to={`/allproperties/${product.id}`}>
@@ -26,6 +50,17 @@ class AllProducts extends React.Component {
             </div>
           )
         })}
+
+        <ReactPaginate
+          previousLabel="← Previous"
+          nextLabel="Next →"
+          pageCount={pageCount}
+          onPageChange={this.handlePageClick}
+          containerClassName="pagination"
+          previousLinkClassName="pagination-link"
+          nextLinkClassName="pagination-link"
+          activeClassName="active"
+        />
       </div>
     )
   }
