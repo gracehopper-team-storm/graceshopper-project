@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {findOrCreateCart} from './../store/cart'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name, isLoggedIn} = props
+  const {name, isLoggedIn, getCart, userId} = props
+
+  useEffect(() => {
+    getCart(userId)
+    console.log('from get cart')
+  })
 
   return (
     <div>
@@ -41,11 +47,18 @@ export const UserHome = props => {
 const mapState = state => {
   return {
     name: state.user.firstName,
+    userId: state.user.id,
     isLoggedIn: !!state.user.id
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    getCart: userId => dispatch(findOrCreateCart(userId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES

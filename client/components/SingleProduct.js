@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/singleProduct'
-
+import AddToCart from './AddToCart'
 class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.getProduct(this.props.match.params.id)
@@ -18,7 +18,7 @@ class SingleProduct extends React.Component {
           <h2>{product.price}</h2>
           <p>{product.description}</p>
 
-          {/* render add to cart button here  */}
+          <AddToCart />
         </div>
       </div>
     )
