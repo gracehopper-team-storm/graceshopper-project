@@ -60,6 +60,16 @@ async function seedUsers() {
   console.log(`seeded successfully`)
 }
 
+//create order
+async function seedOrder() {
+  for (let i = 1; i < 31; i++) {
+    await Order.create({
+      status: 'in_cart',
+      userId: i
+    })
+  }
+}
+
 async function seedAddresses() {
   for (let i = 0; i < 25; i++) {
     let streetAddress = faker.address.streetAddress()
@@ -95,6 +105,25 @@ async function associatesUserAddress() {
   console.log(`associated successfully`)
 }
 
+// order product through table
+// orderId and productId
+async function joinOrderProduct(orderId, productId) {
+  const order = await Order.findByPk(orderId)
+  const product = await Product.findByPk(productId)
+
+  await order.addProduct(product)
+}
+
+async function associatesOrderProduct() {
+  for (let i = 1; i < 16; i++) {
+    let numProducts = Math.floor(Math.random() * Math.floor(15))
+    for (let j = 1; j < numProducts; j++) {
+      let productId = Math.floor(Math.random() * Math.floor(100))
+      await joinOrderProduct(i, productId)
+    }
+  }
+}
+
 async function seedProducts() {
   for (let i = 0; i < 100; i++) {
     let name = faker.commerce.productName()
@@ -125,9 +154,11 @@ async function runSeed() {
     await db.sync({force: true})
     console.log('db synced!')
     await seedUsers()
+    await seedOrder()
     await seedAddresses()
     await seedProducts()
     await associatesUserAddress()
+    await associatesOrderProduct()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
