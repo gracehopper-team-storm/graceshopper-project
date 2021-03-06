@@ -38,7 +38,7 @@ class AllProducts extends React.Component {
 
     return (
       <div>
-        <h1>Plant Heaven</h1>
+        <h1>Live Plants</h1>
         {currentPosts.map(product => {
           return (
             <div key={product.id}>
