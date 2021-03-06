@@ -1,25 +1,9 @@
-//can assume an active cart exists for logged in user
-//we have created/found active cart when user logged in
-//we need: that order id, product id
-
-//adding a product to order
-// cart/addproduct/orderid/productid
-
-//order = Order.findByPk(orderId)
-//product = Product.findByPk(productId)
-//order.addProduct(product)
-
-//removign a product from order
-// cart/removeproduct/orderid/productid
-
-//order = Order.findByPk(orderId)
-//product = Product.findByPk(productId)
-//order.removeProduct(product)
-
 const router = require('express').Router()
 const {Product, Order, User} = require('../db/models')
 module.exports = router
 
+//Find or create a user's active order
+//GET api/cart/:userId
 router.get('/:userId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findOrCreate({
@@ -34,6 +18,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//PUT api/cart/addproduct/:orderId/:productId
 router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findByPk(req.params.orderId)
@@ -46,7 +31,7 @@ router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
     next(error)
   }
 })
-
+//PUT api/cart/addproduct/:orderId/:productId
 router.put('/removeproduct/:orderId/:productId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findByPk(req.params.orderId)
