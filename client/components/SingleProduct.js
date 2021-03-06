@@ -1,21 +1,22 @@
 import React from 'react'
-import {connect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {fetchProduct} from '../store/singleProduct'
 
 class SingleProduct extends React.Component {
-  constructor() {
-    super()
-    //get info for product
+  componentDidMount() {
+    this.props.getProduct(this.props.match.params.id)
   }
-  componentDidMount() {}
   render() {
+    const product = this.props.product
     return (
       <div>
         <div id="singleProd-image">
-          <img />
+          <img src={product.image} />
         </div>
         <div id="singleProd-info">
-          <h2>Plant Name</h2>
-          <p>brief description of plant </p>
+          <h2>{product.name}</h2>
+          <h2>{product.price}</h2>
+          <p>{product.description}</p>
 
           {/* render add to cart button here  */}
         </div>
@@ -25,10 +26,14 @@ class SingleProduct extends React.Component {
 }
 
 const mapState = state => {
-  return {}
+  return {
+    product: state.singleProductReducer
+  }
 }
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    getProduct: id => dispatch(fetchProduct(id))
+  }
 }
 
-export default connect()(SingleProduct)
+export default connect(mapState, mapDispatch)(SingleProduct)
