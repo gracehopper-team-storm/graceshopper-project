@@ -10,26 +10,42 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div className="form">
       <form onSubmit={handleSubmit} name={name}>
+        <div>
+          <label>
+            <small>First Name</small>
+          </label>
+          <input name="firstName" type="text" id="input" />
+        </div>
+        <div>
+          <label>
+            <small>Last Name</small>
+          </label>
+          <input name="lastName" type="text" id="input" />
+        </div>
+
         <div>
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" />
+          <input name="email" type="text" id="input" />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input name="password" type="password" id="input" />
         </div>
         <div>
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <br />
+      <span>
+        <a href="/auth/google">{displayName} with Google</a>
+      </span>
     </div>
   )
 }
@@ -41,10 +57,11 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = state => {
+
+const mapSignup = state => {
   return {
-    name: 'login',
-    displayName: 'Login',
+    name: 'signup',
+    displayName: 'Sign Up',
     error: state.user.error
   }
 }
@@ -61,7 +78,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
 /**
  * PROP TYPES
