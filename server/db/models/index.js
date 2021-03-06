@@ -11,7 +11,10 @@ Order.belongsTo(User)
 const Order_Product = db.define(
   'Order_Product',
   {
-    quantity: Sequelize.INTEGER
+    quantity: {
+      type: Sequelize.INTEGER,
+      defaultValue: 1
+    }
   },
   {timestamps: false}
 )
@@ -45,5 +48,7 @@ module.exports = {
   User,
   Product,
   Order,
-  Address
+  Address,
+  Order_Product,
+  User_Address
 }
