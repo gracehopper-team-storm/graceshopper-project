@@ -7,11 +7,11 @@ import {Link} from 'react-router-dom'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name} = props
+  const {name, isLoggedIn} = props
 
   return (
     <div>
-      <h3>Welcome, {name}!</h3>
+      {isLoggedIn ? <h3>Welcome, {name}!</h3> : <h3>Welcome, Guest!</h3>}
       <img
         src="https://c.i.etsystatic.com/19586643/r/il/afd3d5/2705948432/il_1588xN.2705948432_omh6.jpg"
         width="500px"
@@ -40,7 +40,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    name: state.user.name
+    name: state.user.firstName,
+    isLoggedIn: !!state.user.id
   }
 }
 
