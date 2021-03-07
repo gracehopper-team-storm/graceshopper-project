@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Action Type
 const ADD_PRODUCT = 'ADD_PRODUCT'
-const GET_CART = 'GET_CART'
+const CREATE_CART = 'CREATE_CART'
 
 // Action Creator
 const addedProduct = product => ({
@@ -10,8 +10,8 @@ const addedProduct = product => ({
   product
 })
 
-const fetchCart = activeOrder => ({
-  type: GET_CART,
+const createCart = activeOrder => ({
+  type: CREATE_CART,
   activeOrder
 })
 
@@ -30,7 +30,7 @@ export const addProduct = (orderId, productId) => async dispatch => {
 export const findOrCreateCart = userId => async dispatch => {
   try {
     const activeOrder = await axios.get(`/api/cart/${userId}`)
-    dispatch(fetchCart(activeOrder.data))
+    dispatch(createCart(activeOrder.data))
   } catch (error) {
     console.error(error)
   }
