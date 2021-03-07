@@ -4,32 +4,31 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
     <h1>GRACE SHOPPER</h1>
-    {/* <nav> */}
-    {/* {isLoggedIn ? (
+    <nav>
+      {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-    {/* <Link to="/home">Home</Link>
+          <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/allproducts">Shop</Link>
+          <Link to="/cart">Cart</Link>
+          {isAdmin ? <Link to="/allusers">User List</Link> : ''}
         </div>
       ) : (
-        <div> */}
-    {/* The navbar will show these links before you log in */}
-    {/* <Link to="/login">Login</Link>
+        <div>
+          {/* The navbar will show these links before you log in */}
+          <Link to="/home">Home</Link>
+          <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          <Link to="/allproducts">Shop</Link>
+          <Link to="/cart">Cart</Link>
         </div>
-      )} */}
-    {/* </nav> */}
-    <nav>
-      <Link to="/home">Home</Link>
-      <Link to="/allproducts">Shop</Link>
-      <Link to="/login">Log In</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="/signup">Sign Up</Link>
+      )}
     </nav>
 
     <hr />
@@ -41,7 +40,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin
   }
 }
 
@@ -60,5 +60,6 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired
 }
