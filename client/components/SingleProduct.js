@@ -18,7 +18,7 @@ class SingleProduct extends React.Component {
           <h2>{product.price}</h2>
           <p>{product.description}</p>
 
-          <AddToCart />
+          <AddToCart productId={this.props.match.params.id} />
         </div>
       </div>
     )

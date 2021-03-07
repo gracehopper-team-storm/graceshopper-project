@@ -5,13 +5,19 @@ import {addProduct} from './../store/cart'
 
 class AddToCart extends React.Component {
   componentDidMount() {
-    console.log('PROPS', this.props.user)
+    console.log('PROPS', this.props)
+    console.log('STATE', this.props.state)
   }
 
   render() {
     return (
       <div>
-        <button>Add To Cart</button>
+        <button
+          onClick={() => addProduct(this.props.orderId, this.props.productId)}
+        >
+          {/* <button> */}
+          Add To Cart
+        </button>
       </div>
     )
   }
@@ -19,12 +25,16 @@ class AddToCart extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    orderId: state.cartReducer.id,
+    state: state.cartReducer
   }
 }
 
 const mapDispatch = dispatch => {
-  return {}
+  return {
+    addProduct: (orderId, productId) => dispatch(addProduct(orderId, productId))
+  }
 }
 
 export default connect(mapState, mapDispatch)(AddToCart)
