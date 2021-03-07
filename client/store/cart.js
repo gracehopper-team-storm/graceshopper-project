@@ -5,9 +5,9 @@ const ADD_PRODUCT = 'ADD_PRODUCT'
 const CREATE_CART = 'CREATE_CART'
 
 // Action Creator
-const addedProduct = product => ({
+const addedProduct = order => ({
   type: ADD_PRODUCT,
-  product
+  order
 })
 
 const createCart = activeOrder => ({
@@ -16,14 +16,18 @@ const createCart = activeOrder => ({
 })
 
 // Thunk
-export const addProduct = (orderId, productId) => async dispatch => {
-  try {
-    const product = await axios.put(
-      `/api/cart/addproduct/${orderId}/${productId}`
-    )
-    dispatch(addedProduct(product.data))
-  } catch (error) {
-    console.error(error)
+export const addProduct = (orderId, productId) => {
+  return async dispatch => {
+    try {
+      const order = await axios.put(
+        `/api/cart/addproduct/${orderId}/${productId}`
+      )
+      console.log('ORDER', order)
+      dispatch(addedProduct(order.data))
+    } catch (error) {
+      console.log('ERROR')
+      console.error(error)
+    }
   }
 }
 
@@ -43,7 +47,10 @@ let initialState = []
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return [...action.product]
+      console.log('ACTION', action.order)
+      return action.order
+    case CREATE_CART:
+      return action.activeOrder[0]
     default:
       return state
   }
