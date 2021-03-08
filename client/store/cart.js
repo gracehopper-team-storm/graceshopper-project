@@ -48,8 +48,9 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
       console.log('ACTION', action.order)
-      return action.order
+      return [...state, action.order]
     case CREATE_CART:
+      console.log('ORDER FROM REDUCER', action.activeOrder)
       return action.activeOrder
     default:
       return state

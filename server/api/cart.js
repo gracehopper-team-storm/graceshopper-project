@@ -12,7 +12,14 @@ router.get('/:userId', async (req, res, next) => {
         status: 'in_cart'
       }
     })
-    res.send(activeOrder).status(201)
+
+    const productsInCart = await Order_Product.findAll({
+      where: {
+        orderId: activeOrder[0].dataValues.id
+      }
+    })
+
+    res.send(productsInCart).status(201)
   } catch (error) {
     next(error)
   }

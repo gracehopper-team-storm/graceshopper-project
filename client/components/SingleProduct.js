@@ -18,7 +18,10 @@ class SingleProduct extends React.Component {
           <h2>{product.price}</h2>
           <p>{product.description}</p>
 
-          <AddToCart productId={this.props.match.params.id} />
+          <AddToCart
+            productId={this.props.match.params.id}
+            userId={this.props.user}
+          />
         </div>
       </div>
     )
@@ -27,7 +30,8 @@ class SingleProduct extends React.Component {
 
 const mapState = state => {
   return {
-    product: state.singleProductReducer
+    product: state.singleProductReducer,
+    user: state.user.id
   }
 }
 const mapDispatch = dispatch => {
