@@ -12,12 +12,6 @@ class AddToCart extends React.Component {
     this.props.cart(this.props.user.id)
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.user.id !== prevProps.user.id) {
-      this.props.cart(this.props.user.id)
-    }
-  }
-
   render() {
     return (
       <div>
