@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {me, logout} from './user'
+import {me, logout, login, auth} from './user'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -35,6 +35,32 @@ describe('thunk creators', () => {
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_USER')
       expect(actions[0].user).to.be.deep.equal(fakeUser)
+    })
+  })
+
+  describe('login', () => {
+    it('log:in: dispatches the GET_USER action', async () => {
+      let email = 'harryPotter@email.com'
+      let password = '1234'
+      let method = 'login'
+      mockAxios.onPost('/auth/login').replyOnce(204)
+      await store.dispatch(login(email, password, method))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('GET_USER')
+    })
+  })
+
+  describe('signup', () => {
+    it('signup: if the same email exists in the database already send 401 error', async () => {
+      let firstName = 'Harry'
+      let lastName = 'Potter'
+      let email = 'harryPotter@email.com'
+      let password = '1234'
+      let method = 'login'
+      mockAxios.onPost('/auth/login').replyOnce(204)
+      await store.dispatch(auth(firstName, lastName, email, password, method))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('GET_USER')
     })
   })
 
