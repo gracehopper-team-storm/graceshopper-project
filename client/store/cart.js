@@ -28,6 +28,7 @@ export const addProduct = (orderId, productId) => {
       const order = await axios.put(
         `/api/cart/addproduct/${orderId}/${productId}`
       )
+      console.log('ORDER', order)
       dispatch(addedProduct(order.data))
     } catch (error) {
       console.log('ERROR')
@@ -60,15 +61,15 @@ export const deleteProduct = (orderId, productId) => async dispatch => {
 }
 
 // Initial State
-let initialState = []
+let initialState = {}
 
 // Reducer
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return [...state, action.order]
+      console.log('ADD FROM REDUCER', action.order)
+      return action.order
     case CREATE_CART:
-      console.log('ORDER FROM REDUCER', action.activeOrder)
       return action.activeOrder
     case DELETE_PRODUCT:
       return action.productsInCart

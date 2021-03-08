@@ -6,10 +6,9 @@ import {addProduct, findOrCreateCart} from './../store/cart'
 class AddToCart extends React.Component {
   componentDidMount() {
     console.log('PROPS', this.props)
-    console.log('ORDERID', this.props.orderId)
-    console.log('STATE', this.props.state)
+    console.log('CART', this.props.cart)
 
-    this.props.cart(this.props.user.id)
+    this.props.getCart(this.props.user.id)
   }
 
   render() {
@@ -17,10 +16,7 @@ class AddToCart extends React.Component {
       <div>
         <button
           onClick={() =>
-            this.props.addProduct(
-              this.props.state[0].orderId,
-              this.props.productId
-            )
+            this.props.addProduct(this.props.cart.orderId, this.props.productId)
           }
         >
           {/* <button> */}
@@ -34,7 +30,7 @@ class AddToCart extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    state: state.cartReducer
+    cart: state.cartReducer
   }
 }
 
@@ -42,7 +38,7 @@ const mapDispatch = dispatch => {
   return {
     addProduct: (orderId, productId) =>
       dispatch(addProduct(orderId, productId)),
-    cart: userId => dispatch(findOrCreateCart(userId))
+    getCart: userId => dispatch(findOrCreateCart(userId))
   }
 }
 
