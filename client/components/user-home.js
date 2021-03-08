@@ -10,14 +10,14 @@ import {findOrCreateCart} from './../store/cart'
 export const UserHome = props => {
   const {name, isLoggedIn, createCart, userId} = props
 
-  useEffect(
-    () => {
-      if (userId) {
-        createCart(userId)
-      }
-    },
-    [userId]
-  )
+  // useEffect(
+  //   () => {
+  //     if (userId) {
+  //       createCart(userId)
+  //     }
+  //   },
+  //   [userId]
+  // )
 
   return (
     <div>
