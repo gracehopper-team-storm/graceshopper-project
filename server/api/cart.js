@@ -43,15 +43,17 @@ router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
   }
 })
 
-//PUT api/cart/addproduct/:orderId/:productId
+//PUT api/cart/removeroduct/:orderId/:productId
 router.put('/removeproduct/:orderId/:productId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findByPk(req.params.orderId)
     const product = await Product.findByPk(req.params.productId)
 
-    const updatedOrder = await activeOrder.removeProduct(product)
+    await activeOrder.removeProduct(product)
 
-    res.send(activeOrder).status(200)
+    let updatedProducts = await activeOrder.getProducts()
+
+    res.send(updatedProducts).status(200)
   } catch (error) {
     next(error)
   }
