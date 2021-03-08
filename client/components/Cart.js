@@ -6,11 +6,13 @@ import {findOrCreateCart} from '../store/cart'
 import {fetchProduct} from '../store/singleProduct'
 
 class Cart extends React.Component {
+  componentDidMount() {
+    this.props = findOrCreateCart()
+  }
   render() {
-    const products = this.props.order.map(elem => {
-      fetchProduct(elem.productId)
-    })
+    const {products} = this.props
     const orderId = this.props.order.id
+    console.log('products', products)
     return (
       <div id="cart">
         <h2>Cart</h2>
@@ -19,7 +21,7 @@ class Cart extends React.Component {
             <h3>Empty Cart</h3>
           ) : (
             products.map(item => (
-              <div key={item.id} id="item-container">
+              <div key={item.productId} id="item-container">
                 <div id="item">
                   <img src={item.imageUrl} alt={item.name} />
                   <Link to={`/allproducts/${item.id}`}>
