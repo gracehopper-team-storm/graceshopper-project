@@ -5,12 +5,6 @@ import {Link} from 'react-router-dom'
 import {findOrCreateCart} from '../store/cart'
 
 class Cart extends React.Component {
-  componentDidMount() {
-    console.log('ORDER', this.props.order)
-    console.log('PROPS', this.props)
-    console.log('USER ID', this.props.userId)
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userId !== prevProps.userId) {
       this.props.findOrCreateCart(this.props.userId)
@@ -82,7 +76,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
-    fetchProduct: productId => dispatch(fetchProduct(productId)),
     increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
     decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
     deleteProduct: () => dispatch(deleteProduct(orderId, productId))
