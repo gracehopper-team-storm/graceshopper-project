@@ -19,8 +19,10 @@ router.get('/:userId', async (req, res, next) => {
       }
     })
 
-    console.log(productsInCart)
-    res.send(productsInCart).status(201)
+    let products = await activeOrder.getProducts()
+    // console.log(products)
+
+    res.send(products).status(200)
   } catch (error) {
     next(error)
   }
