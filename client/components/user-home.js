@@ -8,16 +8,7 @@ import {findOrCreateCart} from './../store/cart'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {name, isLoggedIn, createCart, userId} = props
-
-  // useEffect(
-  //   () => {
-  //     if (userId) {
-  //       createCart(userId)
-  //     }
-  //   },
-  //   [userId]
-  // )
+  const {name, isLoggedIn, userId} = props
 
   return (
     <div>
@@ -56,13 +47,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    createCart: userId => dispatch(findOrCreateCart(userId))
-  }
-}
-
-export default connect(mapState, mapDispatch)(UserHome)
+export default connect(mapState)(UserHome)
 
 /**
  * PROP TYPES

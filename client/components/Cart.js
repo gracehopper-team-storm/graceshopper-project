@@ -3,16 +3,25 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {findOrCreateCart} from '../store/cart'
-import {fetchProduct} from '../store/singleProduct'
 
 class Cart extends React.Component {
   componentDidMount() {
-    this.props = findOrCreateCart()
+    console.log('ORDER', this.props.order)
+    console.log('PROPS', this.props)
+    console.log('USER ID', this.props.userId)
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.userId !== prevProps.userId) {
+      this.props.findOrCreateCart(this.props.userId)
+    }
+  }
+
   render() {
-    const {products} = this.props
+    const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
     console.log('products', products)
+
     return (
       <div id="cart">
         <h2>Cart</h2>
@@ -21,9 +30,9 @@ class Cart extends React.Component {
             <h3>Empty Cart</h3>
           ) : (
             products.map(item => (
-              <div key={item.productId} id="item-container">
+              <div key={item.id} id="item-container">
                 <div id="item">
-                  <img src={item.imageUrl} alt={item.name} />
+                  <img src={item.image} alt={item.name} />
                   <Link to={`/allproducts/${item.id}`}>
                     <h4>{item.name}</h4>
                   </Link>
