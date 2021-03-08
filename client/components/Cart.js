@@ -67,7 +67,7 @@ const mapDispatchToProps = dispatch => {
     getOrder: () => dispatch(getOrder()),
     increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
     decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    deleteItem: () => dispatch(deleteItem(orderId, productId))
+    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
   }
 }
 
