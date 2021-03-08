@@ -26,7 +26,7 @@ class Cart extends React.Component {
             products.map(item => (
               <div key={item.id} id="item-container">
                 <div id="item">
-                  <img src={item.image} alt={item.name} />
+                  <img src={item.image} alt={item.name} width="200px" />
                   <Link to={`/allproducts/${item.id}`}>
                     <h4>{item.name}</h4>
                   </Link>
