@@ -66,9 +66,9 @@ let initialState = []
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return [...state, action.order]
+      return action.order
     case CREATE_CART:
-      return action.activeOrder[0]
+      return action.activeOrder
     case DELETE_PRODUCT:
       return action.productsInCart
     default:
