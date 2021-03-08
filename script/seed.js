@@ -128,7 +128,8 @@ async function seedProducts() {
   for (let i = 0; i < 100; i++) {
     let name = faker.commerce.productName()
     let description = faker.commerce.productDescription()
-    let image = faker.image.nature()
+    let image =
+      'https://i.etsystatic.com/13346155/r/il/1a3547/1602266077/il_1588xN.1602266077_nrem.jpg'
     let price = faker.commerce.price(1, 100, 2)
     let inventory = faker.random.number()
 
