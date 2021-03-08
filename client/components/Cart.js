@@ -2,8 +2,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {findOrCreateCart} from '../store/cart'
 
 class Cart extends React.Component {
+  componentDidMount() {
+    this.props.findOrCreateCart(this.props.userId)
+  }
   render() {
     const {order} = this.props
     return (
@@ -58,13 +62,14 @@ class Cart extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    order: state.order
+    order: state.cartReducer,
+    userId: state.user.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getOrder: () => dispatch(getOrder()),
+    findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
     increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
     decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
     deleteProduct: () => dispatch(deleteProduct(orderId, productId))
