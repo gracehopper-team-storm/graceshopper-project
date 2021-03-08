@@ -66,8 +66,9 @@ let initialState = []
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return action.order
+      return [...state, action.order]
     case CREATE_CART:
+      console.log('ORDER FROM REDUCER', action.activeOrder)
       return action.activeOrder
     case DELETE_PRODUCT:
       return action.productsInCart

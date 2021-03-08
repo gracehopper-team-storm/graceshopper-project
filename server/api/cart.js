@@ -12,7 +12,17 @@ router.get('/:userId', async (req, res, next) => {
         status: 'in_cart'
       }
     })
-    res.send(activeOrder).status(201)
+
+    const productsInCart = await Order_Product.findAll({
+      where: {
+        orderId: activeOrder[0].dataValues.id
+      }
+    })
+
+    let products = await activeOrder.getProducts()
+    // console.log(products)
+
+    res.send(products).status(200)
   } catch (error) {
     next(error)
   }
@@ -24,20 +34,23 @@ router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
     const activeOrder = await Order.findByPk(req.params.orderId)
     const product = await Product.findByPk(req.params.productId)
 
-    const productInCart = await Order_Product.findOne({
+    const throughTable = await Order_Product.findOne({
       where: {
         orderId: req.params.orderId,
         productId: req.params.productId
       }
     })
 
-    if (productInCart) {
-      productInCart.increment('quantity')
+    if (throughTable) {
+      throughTable.increment('quantity')
     } else {
       await activeOrder.addProduct(product)
     }
 
-    res.send(productInCart).status(200)
+    let products = await activeOrder.getProducts()
+    // console.log(products)
+
+    res.send(products).status(200)
   } catch (error) {
     next(error)
   }
