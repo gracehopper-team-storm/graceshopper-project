@@ -3,6 +3,7 @@ import axios from 'axios'
 // Action Type
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const CREATE_CART = 'CREATE_CART'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 // Action Creator
 const addedProduct = order => ({
@@ -15,6 +16,11 @@ const createCart = activeOrder => ({
   activeOrder
 })
 
+const deletedProduct = productsInCart => ({
+  type: DELETE_PRODUCT,
+  productsInCart
+})
+
 // Thunk
 export const addProduct = (orderId, productId) => {
   return async dispatch => {
@@ -22,7 +28,6 @@ export const addProduct = (orderId, productId) => {
       const order = await axios.put(
         `/api/cart/addproduct/${orderId}/${productId}`
       )
-      console.log('ORDER', order)
       dispatch(addedProduct(order.data))
     } catch (error) {
       console.log('ERROR')
@@ -40,6 +45,20 @@ export const findOrCreateCart = userId => async dispatch => {
   }
 }
 
+//remove connection between the product and order and return the updated products in the cart
+export const deleteProduct = (orderId, productId) => async dispatch => {
+  try {
+    //getting array of object
+    let productsInCart = await axios.put(
+      `api/cart/addproduct/${orderId}/${productId}`
+    )
+
+    dispatch(deletedProduct(productsInCart))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 // Initial State
 let initialState = []
 
@@ -47,10 +66,11 @@ let initialState = []
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      console.log('ACTION', action.order)
-      return action.order
+      return [...state, action.order]
     case CREATE_CART:
       return action.activeOrder[0]
+    case DELETE_PRODUCT:
+      return action.productsInCart
     default:
       return state
   }
