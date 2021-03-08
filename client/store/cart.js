@@ -50,7 +50,7 @@ const cartReducer = (state = initialState, action) => {
       console.log('ACTION', action.order)
       return action.order
     case CREATE_CART:
-      return action.activeOrder[0]
+      return action.activeOrder
     default:
       return state
   }
