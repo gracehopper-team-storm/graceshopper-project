@@ -59,7 +59,7 @@ router.put('/removeproduct/:orderId/:productId', async (req, res, next) => {
 
     let updatedProducts = await activeOrder.getProducts()
 
-    res.send(updatedProducts).status(200)
+    res.send({orderId: req.params.orderId, updatedProducts}).status(200)
   } catch (error) {
     next(error)
   }
@@ -81,7 +81,9 @@ router.put('/decrementproduct/:orderId/:productId', async (req, res, next) => {
       productInCart.decrement('quantity')
     }
 
-    res.send(productInCart).status(200)
+    let products = await activeOrder.getProducts()
+
+    res.send({orderId: req.params.orderId, products}).status(200)
   } catch (error) {
     next(error)
   }

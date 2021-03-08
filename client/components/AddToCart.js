@@ -19,7 +19,6 @@ class AddToCart extends React.Component {
             this.props.addProduct(this.props.cart.orderId, this.props.productId)
           }
         >
-          {/* <button> */}
           Add To Cart
         </button>
       </div>

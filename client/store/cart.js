@@ -53,7 +53,6 @@ export const deleteProduct = (orderId, productId) => async dispatch => {
     let productsInCart = await axios.put(
       `api/cart/addproduct/${orderId}/${productId}`
     )
-
     dispatch(deletedProduct(productsInCart))
   } catch (error) {
     console.error(error)
