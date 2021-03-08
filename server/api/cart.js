@@ -51,12 +51,9 @@ router.put('/removeproduct/:orderId/:productId', async (req, res, next) => {
 
     await activeOrder.removeProduct(product)
 
-    const productsInCart = await Order_Product.findAll({
-      where: {
-        orderId: req.params.orderId
-      }
-    })
-    res.send(productsInCart).status(200)
+    let updatedProducts = await activeOrder.getProducts()
+
+    res.send(updatedProducts).status(200)
   } catch (error) {
     next(error)
   }
