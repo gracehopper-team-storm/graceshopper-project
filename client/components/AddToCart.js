@@ -13,7 +13,9 @@ class AddToCart extends React.Component {
     return (
       <div>
         <button
-          onClick={() => addProduct(this.props.orderId, this.props.productId)}
+          onClick={() =>
+            this.props.addProduct(this.props.state[0].id, this.props.productId)
+          }
         >
           {/* <button> */}
           Add To Cart
@@ -26,7 +28,7 @@ class AddToCart extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    orderId: state.cartReducer.id,
+    // orderId: state.cartReducer[0].id,
     state: state.cartReducer
   }
 }
