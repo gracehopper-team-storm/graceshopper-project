@@ -6,20 +6,17 @@ import {findOrCreateCart} from '../store/cart'
 import {fetchProduct} from '../store/singleProduct'
 
 class Cart extends React.Component {
-  // componentDidMount() {
-  //   this.props.findOrCreateCart(this.props.userId)
-  // }
   render() {
     const products = this.props.order.map(elem => {
       fetchProduct(elem.productId)
     })
-    console.log(products)
+    const orderId = this.props.order.id
     return (
       <div id="cart">
         <h2>Cart</h2>
         <div id="order-container">
           {!products.length || products === undefined ? (
-            <h3>Empty</h3>
+            <h3>Empty Cart</h3>
           ) : (
             products.map(item => (
               <div key={item.id} id="item-container">
@@ -35,20 +32,20 @@ class Cart extends React.Component {
                     <button
                       id="increase"
                       onClick={() => {
-                        this.props.increaseQuantity()
+                        this.props.increaseQuantity(orderId, item.id)
                       }}
                     />
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
-                        this.props.decreaseQuantity()
+                        this.props.decreaseQuantity(orderId, item.id)
                       }}
                     />
                     <button
                       id="delete-product"
                       onClick={() => {
-                        this.props.deleteProduct()
+                        this.props.deleteProduct(orderId, item.id)
                       }}
                     >
                       Delete Item
@@ -74,10 +71,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
-    fetchProduct: productId => dispatch(fetchProduct(productId))
-    // increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
-    // decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    // deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+    fetchProduct: productId => dispatch(fetchProduct(productId)),
+    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
+    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
+    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
   }
 }
 
