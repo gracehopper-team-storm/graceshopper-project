@@ -87,6 +87,8 @@ export const completeOrder = orderId => {
 // Initial State
 let initialState = {}
 
+// if a lot of the actions in your reducer do the same thing, you can reduce it to just one action type
+
 // Reducer
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {

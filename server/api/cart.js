@@ -14,12 +14,17 @@ router.get('/:userId', async (req, res, next) => {
     })
 
     let products = await activeOrder[0].getProducts()
-
+    // set the status before sending
     res.send({orderId: activeOrder[0].dataValues.id, products}).status(200)
+    console.log("this will still run");
   } catch (error) {
     next(error)
   }
 })
+
+// in keeping our routes "RESTful", we don't want to add the verb to the route
+// someone like "POST api/cart/:orderId/:productId" implies that you're adding the
+// product to the cart since it's a POST
 
 //PUT api/cart/addproduct/:orderId/:productId
 router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
@@ -47,6 +52,8 @@ router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
     next(error)
   }
 })
+
+// Similarly here, you can make this a DELETE route
 
 //PUT api/cart/removeroduct/:orderId/:productId
 router.put('/removeproduct/:orderId/:productId', async (req, res, next) => {

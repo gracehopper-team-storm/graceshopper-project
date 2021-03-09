@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {decrement} from '../store/cart'
 
+// I recommend restructuring the components folder with subfolders. For example, you could have a "buttons" folder
+
 const DecrementButton = props => {
   return (
     <div>
