@@ -2,7 +2,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {findOrCreateCart} from '../store/cart'
+import {completeOrder, findOrCreateCart} from '../store/cart'
+import SubmitOrder from './SubmitOrder'
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
@@ -38,14 +39,18 @@ class Cart extends React.Component {
                       onClick={() => {
                         this.props.increaseQuantity(orderId, item.id)
                       }}
-                    />
+                    >
+                      +
+                    </button>
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
                         this.props.decreaseQuantity(orderId, item.id)
                       }}
-                    />
+                    >
+                      -
+                    </button>
                     <button
                       id="delete-product"
                       onClick={() => {
@@ -60,6 +65,7 @@ class Cart extends React.Component {
             ))
           )}
         </div>
+        <SubmitOrder />
       </div>
     )
   }
@@ -75,6 +81,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
+    completeOrder: orderId => dispatch(completeOrder(orderId)),
     increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
     decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
     deleteProduct: () => dispatch(deleteProduct(orderId, productId))
