@@ -2,12 +2,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import DeleteButton from './DeleteButton'
+import IncrementButton from './IncrementButton'
+import DecrementButton from './DecrementButton'
 import {completeOrder, findOrCreateCart} from '../store/cart'
 import SubmitOrder from './SubmitOrder'
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userId !== prevProps.userId) {
+      this.props.findOrCreateCart(this.props.userId)
+    }
+    if (!this.props.order.products && prevProps.order.products) {
       this.props.findOrCreateCart(this.props.userId)
     }
   }
@@ -33,34 +39,10 @@ class Cart extends React.Component {
                   <h5>{item.price}</h5>
                 </div>
                 <div id="quantity-change">
-                  <form>
-                    <button
-                      id="increase"
-                      onClick={() => {
-                        this.props.increaseQuantity(orderId, item.id)
-                      }}
-                    >
-                      +
-                    </button>
-                    <div>{item.Order_Product.quantity}</div>
-                    {item.quantity}
-                    <button
-                      id="decrease"
-                      onClick={() => {
-                        this.props.decreaseQuantity(orderId, item.id)
-                      }}
-                    >
-                      -
-                    </button>
-                    <button
-                      id="delete-product"
-                      onClick={() => {
-                        this.props.deleteProduct(orderId, item.id)
-                      }}
-                    >
-                      Delete Item
-                    </button>
-                  </form>
+                  <h5>{item.Order_Product.quantity}</h5>
+                  <IncrementButton product={item} />
+                  <DecrementButton product={item} />
+                  <DeleteButton product={item} />
                 </div>
               </div>
             ))
@@ -81,11 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
-    completeOrder: orderId => dispatch(completeOrder(orderId)),
-    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
-    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+    findOrCreateCart: userId => dispatch(findOrCreateCart(userId))
   }
 }
 
