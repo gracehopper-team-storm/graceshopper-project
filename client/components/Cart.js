@@ -14,6 +14,7 @@ class Cart extends React.Component {
   render() {
     const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
+    const quantity = this.props.order.products[0].Order_Product.quantity
 
     return (
       <div id="cart">
@@ -38,14 +39,18 @@ class Cart extends React.Component {
                       onClick={() => {
                         this.props.increaseQuantity(orderId, item.id)
                       }}
-                    />
-                    {item.quantity}
+                    >
+                      +
+                    </button>
+                    <div>{quantity}</div>
                     <button
                       id="decrease"
                       onClick={() => {
                         this.props.decreaseQuantity(orderId, item.id)
                       }}
-                    />
+                    >
+                      -
+                    </button>
                     <button
                       id="delete-product"
                       onClick={() => {
