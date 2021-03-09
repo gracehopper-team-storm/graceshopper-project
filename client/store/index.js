@@ -25,10 +25,11 @@ const middleware = composeWithDevTools(
 )
 
 const store = createStore(reducer, localCart, middleware)
+console.log('STORE IN INDEX REDUX', store)
 
 store.subscribe(() => {
   saveState({
-    localCart: store.getState().localCart
+    localCartReducer: store.getState().localCartReducer
   })
 })
 

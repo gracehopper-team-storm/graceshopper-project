@@ -1,22 +1,27 @@
 //action type
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-const GET_CART = 'GET_CART'
+const ADD_GUEST_PRODUCT = 'ADD_GUEST_PRODUCT'
+const REMOVE_GUEST_PRODUCT = 'REMOVE_GUEST_PRODUCT'
+const GET_GUEST_CART = 'GET_GUEST_CART'
 
 //ACTION CREATORs
-const addProduct = product => ({
-  type: ADD_PRODUCT,
+export const addProduct = product => ({
+  type: ADD_GUEST_PRODUCT,
   product
 })
 
-const removeProduct = product => ({
-  type: REMOVE_PRODUCT,
+export const removeProduct = product => ({
+  type: REMOVE_GUEST_PRODUCT,
   product
 })
 
-const gotCart = cart => ({
-  type: GET_CART,
+export const gotCart = cart => ({
+  type: GET_GUEST_CART,
   cart
+})
+
+export const increaseQuantity = product => ({
+  type: INCREMENT_GUEST_PRODUCT,
+  product
 })
 
 const initialState = []
@@ -24,17 +29,17 @@ const initialState = []
 //reducer
 const localCartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
+    case ADD_GUEST_PRODUCT:
+      action.product.quantity = 1
+      console.log('ADDING PROD', action.product)
       return [...state, action.product]
-    case GET_CART:
+    case GET_GUEST_CART:
       return action.cart
-    case REMOVE_PRODUCT:
+    case REMOVE_GUEST_PRODUCT:
       return state.filter(product => product !== action.product)
     default:
       return state
   }
 }
-
-saveState(localCartReducer)
 
 export default localCartReducer

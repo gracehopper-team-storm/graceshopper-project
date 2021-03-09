@@ -4,12 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class LocalCart extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.userId !== prevProps.userId) {
-      this.props.findOrCreateCart(this.props.userId)
-    }
-  }
-
   render() {
     const products = this.props.order.products ? this.props.order.products : []
     console.log('products', products)
@@ -33,20 +27,20 @@ class LocalCart extends React.Component {
                     <button
                       id="increase"
                       onClick={() => {
-                        this.props.increaseQuantity(orderId, item.id)
+                        this.props.increaseQuantity(item.id)
                       }}
                     />
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
-                        this.props.decreaseQuantity(orderId, item.id)
+                        this.props.decreaseQuantity(item.id)
                       }}
                     />
                     <button
                       id="delete-product"
                       onClick={() => {
-                        this.props.deleteProduct(orderId, item.id)
+                        this.props.deleteProduct(item.id)
                       }}
                     >
                       Delete Item
@@ -72,9 +66,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
-    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+    increaseQuantity: productId => dispatch(increaseQuantity(productId)),
+    decreaseQuantity: productId => dispatch(decreaseQuantity(productId)),
+    deleteProduct: productId => dispatch(deleteProduct(productId))
   }
 }
 
