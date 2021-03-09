@@ -39,14 +39,18 @@ class Cart extends React.Component {
                       onClick={() => {
                         this.props.increaseQuantity(orderId, item.id)
                       }}
-                    />
+                    >
+                      +
+                    </button>
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
                         this.props.decreaseQuantity(orderId, item.id)
                       }}
-                    />
+                    >
+                      -
+                    </button>
                     <button
                       id="delete-product"
                       onClick={() => {
