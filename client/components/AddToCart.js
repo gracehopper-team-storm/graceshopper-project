@@ -5,9 +5,6 @@ import {addProduct, findOrCreateCart} from './../store/cart'
 
 class AddToCart extends React.Component {
   componentDidMount() {
-    console.log('PROPS', this.props)
-    console.log('CART', this.props.cart)
-
     this.props.getCart(this.props.user.id)
   }
 

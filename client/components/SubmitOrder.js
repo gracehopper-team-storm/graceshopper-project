@@ -1,17 +1,20 @@
 /* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
-import {completeOrder} from '../store/cart'
+import {completeOrder, findOrCreateCart} from '../store/cart'
 
 class SubmitOrder extends React.Component {
-  handleSubmit(event) {
-    event.preventDefault()
-    this.props.completeOrder()
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick() {
+    this.props.completeOrder(this.props.order.orderId)
   }
   render() {
     return (
       <div>
-        <button id="submit" onClick={() => this.handleSubmit()}>
+        <button id="submit" onClick={this.handleClick}>
           Submit Order
         </button>
       </div>
@@ -27,7 +30,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    completeOrder: () => dispatch(completeOrder())
+    completeOrder: orderId => dispatch(completeOrder(orderId))
   }
 }
 

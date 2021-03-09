@@ -34,10 +34,8 @@ export const addProduct = (orderId, productId) => {
       const order = await axios.put(
         `/api/cart/addproduct/${orderId}/${productId}`
       )
-      console.log('ORDER', order)
       dispatch(addedProduct(order.data))
     } catch (error) {
-      console.log('ERROR')
       console.error(error)
     }
   }
@@ -79,14 +77,13 @@ let initialState = {}
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      console.log('ADD FROM REDUCER', action.order)
       return action.order
     case CREATE_CART:
       return action.activeOrder
     case DELETE_PRODUCT:
       return action.productsInCart
     case COMPLETE_ORDER:
-      state = []
+      state = {}
       return state
     default:
       return state
