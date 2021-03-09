@@ -4,12 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class OrderConfirmation extends React.Component {
-  //   componentDidUpdate(prevProps, prevState) {
-  //     if (this.props.userId !== prevProps.userId) {
-  //       this.props.findOrCreateCart(this.props.userId)
-  //     }
-  //   }
-
   render() {
     var myDate = new Date()
     let daysList = [
@@ -42,8 +36,6 @@ class OrderConfirmation extends React.Component {
     let year = myDate.getFullYear()
     let day = daysList[myDate.getDay()]
     let today = `${month} ${date}, ${year}`
-
-    console.log(this.props.user)
 
     return (
       <div>
