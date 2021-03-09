@@ -5,6 +5,8 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
+import {ToastProvider} from 'react-toast-notifications'
+// import {Snack} from '../snackbar'
 
 // establishes socket connection
 import './socket'
@@ -15,5 +17,6 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
+
   document.getElementById('app')
 )

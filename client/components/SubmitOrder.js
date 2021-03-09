@@ -2,15 +2,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {completeOrder, findOrCreateCart} from '../store/cart'
-
 class SubmitOrder extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
+
   handleClick() {
-    this.props.completeOrder(this.props.order.orderId)
+    if (this.props.order.products.length > 0) {
+      this.props.completeOrder(this.props.order.orderId)
+    }
   }
+
   render() {
     return (
       <div>
