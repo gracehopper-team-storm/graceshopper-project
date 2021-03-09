@@ -3,7 +3,7 @@ import axios from 'axios'
 // Action Type
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const CREATE_CART = 'CREATE_CART'
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const DECREMENT = 'DECREMENT'
 
 // Action Creator
 const addedProduct = order => ({
@@ -16,11 +16,10 @@ const createCart = activeOrder => ({
   activeOrder
 })
 
-const deletedProduct = productsInCart => ({
-  type: DELETE_PRODUCT,
-  productsInCart
+const decremented = decrementedProduct => ({
+  type: DECREMENT,
+  decrementedProduct
 })
-
 // Thunk
 export const addProduct = (orderId, productId) => {
   return async dispatch => {
@@ -51,11 +50,24 @@ export const deleteProduct = (orderId, productId) => async dispatch => {
   try {
     //getting array of object
     let productsInCart = await axios.put(
-      `api/cart/addproduct/${orderId}/${productId}`
+      `api/cart/removeproduct/${orderId}/${productId}`
     )
-    dispatch(deletedProduct(productsInCart))
+    dispatch(createCart(productsInCart.data))
   } catch (error) {
     console.error(error)
+  }
+}
+
+//PUT api/cart/decrementproduct/:orderId/:productId
+export const decrement = (orderId, productId) => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `api/cart/decrementproduct/${orderId}/${productId}`
+    )
+    dispatch(decremented(data))
+    dispatch(createCart(data))
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -66,12 +78,12 @@ let initialState = {}
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      console.log('ADD FROM REDUCER', action.order)
       return action.order
     case CREATE_CART:
       return action.activeOrder
-    case DELETE_PRODUCT:
-      return action.productsInCart
+    case DECREMENT:
+      console.log('decrement reducer', action.decrementedProduct)
+      return action.decrementedProduct
     default:
       return state
   }
