@@ -4,10 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class LocalCart extends React.Component {
-  componentDidMount() {
-    this.props.findOrCreateCart(this.props.userId)
-  }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.userId !== prevProps.userId) {
       this.props.findOrCreateCart(this.props.userId)
     }
@@ -15,7 +12,6 @@ class LocalCart extends React.Component {
 
   render() {
     const products = this.props.order.products ? this.props.order.products : []
-    const orderId = this.props.order.id
     console.log('products', products)
 
     return (
@@ -75,7 +71,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
+    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
+    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocalCart)
