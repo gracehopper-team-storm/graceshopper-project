@@ -15,6 +15,7 @@ class Cart extends React.Component {
   render() {
     const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
+    const quantity = this.props.order.products[0].Order_Product.quantity
 
     return (
       <div id="cart">
@@ -42,6 +43,7 @@ class Cart extends React.Component {
                     >
                       +
                     </button>
+                    <div>{quantity}</div>
                     {item.quantity}
                     <button
                       id="decrease"
