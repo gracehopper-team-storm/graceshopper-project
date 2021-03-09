@@ -4,6 +4,8 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const CREATE_CART = 'CREATE_CART'
 const DECREMENT = 'DECREMENT'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const COMPLETE_ORDER = 'COMPLETE_ORDER'
 
 // Action Creator
 const addedProduct = order => ({
@@ -20,6 +22,12 @@ const decremented = decrementedProduct => ({
   type: DECREMENT,
   decrementedProduct
 })
+
+const completedOrder = order => ({
+  type: COMPLETE_ORDER,
+  order
+})
+
 // Thunk
 export const addProduct = (orderId, productId) => {
   return async dispatch => {
@@ -27,10 +35,8 @@ export const addProduct = (orderId, productId) => {
       const order = await axios.put(
         `/api/cart/addproduct/${orderId}/${productId}`
       )
-      console.log('ORDER', order)
       dispatch(addedProduct(order.data))
     } catch (error) {
-      console.log('ERROR')
       console.error(error)
     }
   }
@@ -71,6 +77,13 @@ export const decrement = (orderId, productId) => async dispatch => {
   }
 }
 
+export const completeOrder = orderId => {
+  return async dispatch => {
+    const order = await axios.put(`/api/cart/submitorder/${orderId}`)
+    dispatch(completedOrder(order))
+  }
+}
+
 // Initial State
 let initialState = {}
 
@@ -82,8 +95,12 @@ const cartReducer = (state = initialState, action) => {
     case CREATE_CART:
       return action.activeOrder
     case DECREMENT:
-      console.log('decrement reducer', action.decrementedProduct)
       return action.decrementedProduct
+    case DELETE_PRODUCT:
+      return action.productsInCart
+    case COMPLETE_ORDER:
+      state = {}
+      return state
     default:
       return state
   }

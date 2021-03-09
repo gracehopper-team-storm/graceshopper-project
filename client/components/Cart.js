@@ -2,10 +2,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {findOrCreateCart} from '../store/cart'
 import DeleteButton from './DeleteButton'
 import IncrementButton from './IncrementButton'
 import DecrementButton from './DecrementButton'
+import {completeOrder, findOrCreateCart} from '../store/cart'
+import SubmitOrder from './SubmitOrder'
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
@@ -31,10 +32,10 @@ class Cart extends React.Component {
             products.map(item => (
               <div key={item.id} id="item-container">
                 <div id="item">
-                  <img src={item.image} alt={item.name} />
                   <Link to={`/allproducts/${item.id}`}>
-                    <h4>{item.name}</h4>
+                    <img src={item.image} alt={item.name} width="200px" />
                   </Link>
+                  <h5>{item.name}</h5>
                   <h5>{item.price}</h5>
                 </div>
                 <div id="quantity-change">
@@ -47,6 +48,7 @@ class Cart extends React.Component {
             ))
           )}
         </div>
+        <SubmitOrder />
       </div>
     )
   }
