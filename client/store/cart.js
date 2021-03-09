@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 // Action Type
 const ADD_PRODUCT = 'ADD_PRODUCT'
@@ -79,8 +80,13 @@ export const decrement = (orderId, productId) => async dispatch => {
 
 export const completeOrder = orderId => {
   return async dispatch => {
-    const order = await axios.put(`/api/cart/submitorder/${orderId}`)
-    dispatch(completedOrder(order))
+    try {
+      const order = await axios.put(`/api/cart/submitorder/${orderId}`)
+      dispatch(completedOrder(order))
+      history.push('/checkout')
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

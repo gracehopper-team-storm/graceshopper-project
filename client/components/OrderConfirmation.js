@@ -49,20 +49,20 @@ class OrderConfirmation extends React.Component {
       <div>
         <h3>Thank you for your order!</h3>
 
-        <h5>Order Confirmation: </h5>
+        {/* <h5>Order Confirmation: </h5> */}
         <h6>{today}</h6>
 
-        <h5>Order Total</h5>
+        {/* <h5>Order Total</h5>
         <h6>Subtotal price:</h6>
         <h6>Discounts:</h6>
         <h6>Shipping price:</h6>
 
-        <h5>Total Price:</h5>
+        <h5>Total Price:</h5> */}
 
         {/* <h5>Billing</h5>
         <h5>Shipping</h5> */}
 
-        <h6>View Order</h6>
+        {/* <h6>View Order</h6> */}
       </div>
     )
   }
