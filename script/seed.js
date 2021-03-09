@@ -9,37 +9,43 @@ async function seedUsers() {
     firstName: 'Natalie',
     lastName: 'Lane',
     email: 'natalie.lane@gracehopper.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Kade',
     lastName: 'Cahe',
     email: 'kadecahe@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Jamie',
     lastName: 'Eunice',
     email: 'jamieecarrasquillo@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Mollie',
     lastName: 'Davidson-Blue',
     email: 'med1198@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Andrea',
     lastName: 'Crabtree',
     email: 'andreancrabtree@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Selina',
     lastName: 'Byeon',
     email: 'seonaebyeon1@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
 
   for (let i = 0; i < 25; i++) {
