@@ -41,7 +41,6 @@ router.put('/addproduct/:orderId/:productId', async (req, res, next) => {
     }
 
     let products = await activeOrder.getProducts()
-    // console.log(products)
 
     res.send({orderId: req.params.orderId, products}).status(200)
   } catch (error) {
