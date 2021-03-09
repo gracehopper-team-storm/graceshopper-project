@@ -14,7 +14,6 @@ class Cart extends React.Component {
   render() {
     const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
-    console.log('products', products)
 
     return (
       <div id="cart">
