@@ -4,6 +4,7 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const CREATE_CART = 'CREATE_CART'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const COMPLETE_ORDER = 'COMPLETE_ORDER'
 
 // Action Creator
 const addedProduct = order => ({
@@ -19,6 +20,11 @@ const createCart = activeOrder => ({
 const deletedProduct = productsInCart => ({
   type: DELETE_PRODUCT,
   productsInCart
+})
+
+const completedOrder = order => ({
+  type: COMPLETE_ORDER,
+  order
 })
 
 // Thunk
@@ -57,6 +63,13 @@ export const deleteProduct = (orderId, productId) => async dispatch => {
   }
 }
 
+export const completeOrder = orderId => {
+  return async dispatch => {
+    const order = await axios.put(`/api/cart/submitorder/${orderId}`)
+    dispatch(completedOrder(order))
+  }
+}
+
 // Initial State
 let initialState = {}
 
@@ -69,6 +82,9 @@ const cartReducer = (state = initialState, action) => {
       return action.activeOrder
     case DELETE_PRODUCT:
       return action.productsInCart
+    case COMPLETE_ORDER:
+      state = {}
+      return state
     default:
       return state
   }

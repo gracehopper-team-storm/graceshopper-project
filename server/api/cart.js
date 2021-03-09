@@ -87,3 +87,13 @@ router.put('/decrementproduct/:orderId/:productId', async (req, res, next) => {
     next(error)
   }
 })
+
+//PUT /api/cart/submitorder/:orderId
+router.put('/submitorder/:orderId', async (req, res, next) => {
+  try {
+    const activeOrder = await Order.findByPk(req.params.orderId)
+    res.send(await activeOrder.update({status: 'completed'}))
+  } catch (error) {
+    next(error)
+  }
+})
