@@ -2,11 +2,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import DeleteButton from './DeleteButton'
-import IncrementButton from './IncrementButton'
-import DecrementButton from './DecrementButton'
-import {completeOrder, findOrCreateCart} from '../store/cart'
-import SubmitOrder from './SubmitOrder'
+import LocalCart from './LocalCart'
+import DeleteButton from '../Buttons/DeleteButton'
+import IncrementButton from '../Buttons/IncrementButton'
+import DecrementButton from '../Buttons/DecrementButton'
+import {findOrCreateCart} from '../../store/redux/cart'
+import SubmitOrder from '../Buttons/SubmitOrder'
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
@@ -20,7 +21,7 @@ class Cart extends React.Component {
 
   render() {
     const products = this.props.order.products ? this.props.order.products : []
-    const orderId = this.props.order.id
+    const orderId = this.props.order.orderId
 
     return (
       <div className="cart">
@@ -55,6 +56,8 @@ class Cart extends React.Component {
           )}
         </div>
         <SubmitOrder />
+        ) : (
+        <LocalCart />
       </div>
     )
   }

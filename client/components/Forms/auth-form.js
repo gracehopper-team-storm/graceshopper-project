@@ -1,40 +1,28 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {login} from '../../store'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-  return (
-    <div className="formSignUp">
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label>
-            <small>First Name</small>
-          </label>
-          <input name="firstName" type="text" id="input" />
-        </div>
-        <div>
-          <label>
-            <small>Last Name</small>
-          </label>
-          <input name="lastName" type="text" id="input" />
-        </div>
 
+  return (
+    <div>
+      <form className="formAuth" onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" id="input" />
+          <input name="email" type="text" />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" id="input" />
+          <input name="password" type="password" />
         </div>
         <div>
           <button className="btn btn-outline-dark" type="submit">
@@ -43,8 +31,7 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <br />
-      <span>{/* <a href="/auth/google">{displayName} with Google</a> */}</span>
+      {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
 }
@@ -56,11 +43,10 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-
-const mapSignup = state => {
+const mapLogin = state => {
   return {
-    name: 'signup',
-    displayName: 'Sign Up',
+    name: 'login',
+    displayName: 'Login',
     error: state.user.error
   }
 }
@@ -69,17 +55,15 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const firstName = evt.target.firstName.value
-      const lastName = evt.target.lastName.value
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(firstName, lastName, email, password, formName))
+      dispatch(login(email, password, formName))
     }
   }
 }
 
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 
 /**
  * PROP TYPES

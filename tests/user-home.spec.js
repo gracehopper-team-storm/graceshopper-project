@@ -4,21 +4,19 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import UserList from './UserList'
+import {UserHome} from '../client/components/Views/user-home'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('UserList', () => {
-  let userList
+describe('UserHome', () => {
+  let userHome
 
   beforeEach(() => {
-    const wrapper = shallow(
-      <UserList firstName="Cody" lastName="Cody" email="cody@email.com" />
-    )
+    userHome = shallow(<UserHome email="cody@email.com" />)
   })
 
   it('renders the email in an h3', () => {
-    expect(wrapper.text()).to.be.include(' cody@email.com')
+    expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
   })
 })

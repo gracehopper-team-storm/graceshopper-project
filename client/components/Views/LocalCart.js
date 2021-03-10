@@ -2,16 +2,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  deleteProduct
+} from '../../store/redux/localCart'
 
 class LocalCart extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.userId !== prevProps.userId) {
-      this.props.findOrCreateCart(this.props.userId)
-    }
-  }
-
   render() {
-    const products = this.props.order.products ? this.props.order.products : []
+    const products = this.props.order ? this.props.order : []
     console.log('products', products)
 
     return (
@@ -33,20 +32,24 @@ class LocalCart extends React.Component {
                     <button
                       id="increase"
                       onClick={() => {
-                        this.props.increaseQuantity(orderId, item.id)
+                        this.props.increaseQuantity(item.id)
                       }}
-                    />
+                    >
+                      +
+                    </button>
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
-                        this.props.decreaseQuantity(orderId, item.id)
+                        this.props.decreaseQuantity(item.id)
                       }}
-                    />
+                    >
+                      -
+                    </button>
                     <button
                       id="delete-product"
                       onClick={() => {
-                        this.props.deleteProduct(orderId, item.id)
+                        this.props.deleteProduct(item.id)
                       }}
                     >
                       Delete Item
@@ -56,7 +59,7 @@ class LocalCart extends React.Component {
               </div>
             ))
           ) : (
-            <h2>empty cart</h2>
+            <h2>empty cart on local </h2>
           )}
         </div>
       </div>
@@ -72,9 +75,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
-    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+    increaseQuantity: productId => dispatch(increaseQuantity(productId)),
+    decreaseQuantity: productId => dispatch(decreaseQuantity(productId)),
+    deleteProduct: productId => dispatch(deleteProduct(productId))
   }
 }
 

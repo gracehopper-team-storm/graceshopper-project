@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {decrement} from '../store/cart'
+import {decrement} from '../../store/redux/cart'
 
 const DecrementButton = props => {
   return (

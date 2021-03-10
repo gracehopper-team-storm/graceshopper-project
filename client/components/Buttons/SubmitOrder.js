@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React from 'react'
 import {connect} from 'react-redux'
-import {completeOrder, findOrCreateCart} from '../store/cart'
+import {completeOrder, findOrCreateCart} from '../../store/redux/cart'
 class SubmitOrder extends React.Component {
   constructor() {
     super()
