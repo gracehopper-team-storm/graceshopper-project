@@ -12,13 +12,11 @@ enzyme.configure({adapter})
 describe('UserList', () => {
   let userList
 
-  beforeEach(() => {
-    const wrapper = shallow(
-      <UserList firstName="Cody" lastName="Cody" email="cody@email.com" />
-    )
-  })
+  const wrapper = shallow(
+    <UserList firstName="Cody" lastName="Cody" email="cody@email.com" />
+  )
 
-  it('renders the email in an h3', () => {
-    expect(wrapper.text()).to.be.include(' cody@email.com')
+  it('renders the email', () => {
+    expect(wrapper.text()).to.be.include('cody@email.com')
   })
 })
