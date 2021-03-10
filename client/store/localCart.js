@@ -1,6 +1,5 @@
 //action type
 const ADD_GUEST_PRODUCT = 'ADD_GUEST_PRODUCT'
-const REMOVE_GUEST_PRODUCT = 'REMOVE_GUEST_PRODUCT'
 const GET_GUEST_CART = 'GET_GUEST_CART'
 const INCREMENT_GUEST_PRODUCT = 'INCREMENT_GUEST_PRODUCT'
 const DECREMENT_GUEST_PRODUCT = 'DECREMENT_GUEST_PRODUCT'
@@ -32,11 +31,6 @@ export const deleteProduct = productId => ({
   productId
 })
 
-// const initialState = {
-//   products: [],
-//   quantities: {}
-// }
-
 const initialState = []
 
 //reducer
@@ -45,14 +39,6 @@ const localCartReducer = (state = initialState, action) => {
     case ADD_GUEST_PRODUCT:
       action.product.quantity = 1
       return [...state, action.product]
-    // console.log(state.quantities)
-    // if(!state.quantities[action.product.id]){
-    //   state.quantities[action.product.id] = 1
-    //   return {...state, products: [...state.products, action.product]}
-    // }else{
-    //   state.quantities[action.product.id]++
-    //   return {...state}
-    // }
     case INCREMENT_GUEST_PRODUCT:
       console.log('incrementing prod')
       //look for product in state and increment quantity
@@ -77,9 +63,4 @@ const localCartReducer = (state = initialState, action) => {
   }
 }
 
-<<<<<<< HEAD
-=======
-// saveState(localCartReducer)
-
->>>>>>> master
 export default localCartReducer

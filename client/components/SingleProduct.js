@@ -34,7 +34,7 @@ class SingleProduct extends React.Component {
           ) : (
             <AddToCart
               productId={this.props.match.params.id}
-              userId={this.props.user}
+              userId={this.props.user.id}
             />
           )}
         </div>
