@@ -4,14 +4,15 @@ import {decrement} from '../store/cart'
 
 const DecrementButton = props => {
   return (
-    <div>
+    <div className="decrement">
       <button
         type="button"
+        className="btn btn-outline-dark"
         onClick={() => {
           props.decrementProduct(props.orderId, props.product.id)
         }}
       >
-        Decrement
+        -
       </button>
     </div>
   )

@@ -9,9 +9,10 @@ class AddToCart extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="addToCart">
         <button
           type="button"
+          className="btn btn-outline-dark"
           onClick={() =>
             this.props.addProduct(this.props.cart.orderId, this.props.productId)
           }

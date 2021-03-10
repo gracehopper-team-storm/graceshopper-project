@@ -9,19 +9,23 @@ class SingleProduct extends React.Component {
   render() {
     const product = this.props.product
     return (
-      <div>
-        <div id="singleProd-image">
-          <img src={product.image} width="500px" />
-        </div>
-        <div id="singleProd-info">
-          <h2>{product.name}</h2>
-          <h2>{product.price}</h2>
-          <p>{product.description}</p>
+      <div className="single">
+        <h2>{product.name}</h2>
 
-          <AddToCart
-            productId={this.props.match.params.id}
-            userId={this.props.user}
-          />
+        <div className="singleProduct">
+          <div id="singleProd-image">
+            <img src={product.image} width="500px" />
+          </div>
+          <div id="singleProd-info">
+            <p>{product.description}</p>
+
+            <h4>${product.price}</h4>
+            <AddToCart
+              className="button"
+              productId={this.props.match.params.id}
+              userId={this.props.user}
+            />
+          </div>
         </div>
       </div>
     )

@@ -37,19 +37,22 @@ class AllProducts extends React.Component {
     )
 
     return (
-      <div>
-        <h1>Live Plants</h1>
-        {currentPosts.map(product => {
-          return (
-            <div key={product.id}>
-              <Link to={`/allproducts/${product.id}`}>
-                <img src={product.image} width="300px" className="cardImg" />
-              </Link>
-              <h4>{product.name}</h4>
-              <p>${product.price}</p>
-            </div>
-          )
-        })}
+      <div className="shopAll">
+        <h1>Live Plants 🌱</h1>
+
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 center">
+          {currentPosts.map(product => {
+            return (
+              <div className="productDiv" key={product.id}>
+                <Link to={`/allproducts/${product.id}`}>
+                  <img src={product.image} width="300px" className="cardImg" />
+                </Link>
+                <h5>{product.name}</h5>
+                <p>${product.price}</p>
+              </div>
+            )
+          })}
+        </div>
 
         <ReactPaginate
           previousLabel="← Previous"

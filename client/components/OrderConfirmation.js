@@ -38,11 +38,11 @@ class OrderConfirmation extends React.Component {
     let today = `${month} ${date}, ${year}`
 
     return (
-      <div>
+      <div className="orderConfirmation">
         <h3>Thank you for your order!</h3>
 
         {/* <h5>Order Confirmation: </h5> */}
-        <h6>{today}</h6>
+        <h5>{today}</h5>
 
         {/* <h5>Order Total</h5>
         <h6>Subtotal price:</h6>

@@ -4,9 +4,10 @@ import {deleteProduct} from '../store/cart'
 
 const DeleteButton = props => {
   return (
-    <div>
+    <div className="delete">
       <button
         type="button"
+        className="btn btn-outline-dark"
         onClick={() => {
           props.delete(props.orderId, props.product.id)
         }}

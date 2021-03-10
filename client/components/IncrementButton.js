@@ -4,14 +4,15 @@ import {addProduct} from '../store/cart'
 
 const IncrementButton = props => {
   return (
-    <div>
+    <div className="increment">
       <button
         type="button"
+        className="btn btn-outline-dark"
         onClick={() => {
           props.incrementProduct(props.orderId, props.product.id)
         }}
       >
-        Increment
+        +
       </button>
     </div>
   )

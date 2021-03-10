@@ -1,5 +1,10 @@
 body {
   font-family: sans-serif;
+  /* background-color: #eee5e5; */
+  background-color: #fff;
+}
+button {
+  font-family: 'Optima';
 }
 
 a {
@@ -10,9 +15,120 @@ label {
   display: block;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #bfcde0;
+  align-items: center;
+  margin: 1em;
+  color: white;
+  padding: 14px 16px;
+  font-size: 15px;
+  border-radius: 5px 5px 5px 5px;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
+  font-size: 15px;
+}
+
+.frontPageText h1 {
+  font-family: 'Didot';
+  font-size: 40px;
+  padding-left: 15px;
+  padding-top: 18px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  padding: 0.5 px;
+  color: white;
+}
+
+.welcomeHome h3 {
+  text-align: center;
+  padding: 15px;
+  font-family: 'Optima';
+}
+
+.welcomeHome h4 {
+  text-align: center;
+  padding: 15px;
+  font-family: 'Optima';
+}
+
+.welcomeHome p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50em;
+}
+
+.welcomeHome img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.aboutUs {
+  margin-top: 25px;
+}
+
+.btn {
+  color: black;
+}
+
+.welcomeHome .btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 35px;
+}
+
+.link {
+  color: black;
+}
+
+.link:hover {
+  color: white;
+}
+
+.productDiv h5 {
+  text-align: center;
+  font-family: 'Optima';
+  padding-top: 10px;
+}
+
+.productDiv p {
+  text-align: center;
+  font-family: 'Optima';
+}
+
+.productDiv img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.shopAll h1 {
+  font-family: 'Optima';
+  margin-top: 35px;
+  margin-bottom: 35px;
+  font-size: 32px;
+  padding-left: 15px;
+}
+
+.cart h6 {
+  font-family: 'Optima';
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 1px;
+}
+
+.cart .price {
+  font-family: 'Optima';
+  margin-left: 15px;
 }
 
 form div {
@@ -23,20 +139,148 @@ span {
   display: flex;
 }
 
-/* pagenation */
+.singleProduct p {
+  font-size: 18px;
+  font-family: 'Optima';
+  margin-left: auto;
+  margin-right: auto;
+  width: 25em;
+  margin-top: 35px;
+}
+
+.singleProduct h4 {
+  font-size: 18px;
+  font-family: 'Optima';
+  text-align: center;
+}
+
+.singleProduct img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.single h2 {
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  font-family: 'Optima';
+}
+
+.cart h2 {
+  font-family: 'Optima';
+  margin-top: 35px;
+  margin-bottom: 35px;
+  font-size: 32px;
+  padding-left: 15px;
+}
+
+.cart img {
+  padding-left: 15px;
+}
+
+.cart p {
+  font-family: 'Optima';
+  margin-left: 15px;
+  font-size: 18px;
+  margin-bottom: 30px;
+  margin-top: -25px;
+}
+
+.cart .product {
+  font-family: 'Optima';
+  text-emphasis: center;
+}
+
+.formAuth small {
+  font-family: 'Optima';
+  font-size: 18px;
+}
+
+.formSignUp small {
+  font-family: 'Optima';
+  font-size: 18px;
+}
+
+.userList {
+  margin-left: 15px;
+}
+
+.userList h3 {
+  font-family: 'Optima';
+  font-size: 18px;
+}
+
+.table {
+  font-family: 'Optima';
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.tableHead {
+  background-color: #fefcfd;
+}
+
+.orderConfirmation h3 {
+  font-family: 'Optima';
+  margin-left: 15px;
+}
+
+.orderConfirmation h5 {
+  font-family: 'Optima';
+  margin-left: 15px;
+}
+
+.submitOrder .btn {
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.addToCart .btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 20px;
+}
+
+.increment .btn {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.decrement .btn {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.delete .btn {
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.row .productQuantity {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* pagination */
 .pagination {
   display: flex;
   list-style: none;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
 .pagination > .active > a {
-  background-color: #de9a47;
-  border-color: #de9a47;
+  background-color: black;
+  border-color: black;
   color: #fff;
 }
 .pagination > li > a {
-  border: 1px solid #de9a47;
+  border: 1px solid white;
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
@@ -47,36 +291,17 @@ span {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #de9a47;
-  border-color: #de9a47;
+  background-color: black;
+  border-color: black;
   outline: none;
 }
 .pagination > li > a,
 .pagination > li > span {
-  color: #de9a47;
+  color: black;
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-radius: unset;
-}
-
-/* signup signin */
-
-.form {
-  display: flex;
-  width: 300px;
-  height: 600px;
-  background: #fffbee;
-  border-radius: 50px;
-}
-
-#input {
-  display: flex;
-  width: 200px;
-  height: 21px;
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(5, 0, 0, 0.25);
-  border-radius: 50px;
 }
