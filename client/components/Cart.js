@@ -2,7 +2,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-// import {findOrCreateCart} from '../store/cart'
 import LocalCart from './LocalCart'
 import DeleteButton from './DeleteButton'
 import IncrementButton from './IncrementButton'
