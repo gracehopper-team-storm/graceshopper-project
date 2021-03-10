@@ -2,26 +2,13 @@ import axios from 'axios'
 import history from '../history'
 
 // Action Type
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const CREATE_CART = 'CREATE_CART'
-const DECREMENT = 'DECREMENT'
-const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const UPDATE_CART = 'UPDATE_CART'
 const COMPLETE_ORDER = 'COMPLETE_ORDER'
 
 // Action Creator
-const addedProduct = order => ({
-  type: ADD_PRODUCT,
+const updatedCart = order => ({
+  type: UPDATE_CART,
   order
-})
-
-const createCart = activeOrder => ({
-  type: CREATE_CART,
-  activeOrder
-})
-
-const decremented = decrementedProduct => ({
-  type: DECREMENT,
-  decrementedProduct
 })
 
 const completedOrder = order => ({
@@ -33,10 +20,8 @@ const completedOrder = order => ({
 export const addProduct = (orderId, productId) => {
   return async dispatch => {
     try {
-      const order = await axios.put(
-        `/api/cart/addproduct/${orderId}/${productId}`
-      )
-      dispatch(addedProduct(order.data))
+      const order = await axios.post(`/api/cart/${orderId}/${productId}`)
+      dispatch(updatedCart(order.data))
     } catch (error) {
       console.error(error)
     }
@@ -46,7 +31,7 @@ export const addProduct = (orderId, productId) => {
 export const findOrCreateCart = userId => async dispatch => {
   try {
     const activeOrder = await axios.get(`/api/cart/${userId}`)
-    dispatch(createCart(activeOrder.data))
+    dispatch(updatedCart(activeOrder.data))
   } catch (error) {
     console.error(error)
   }
@@ -56,23 +41,18 @@ export const findOrCreateCart = userId => async dispatch => {
 export const deleteProduct = (orderId, productId) => async dispatch => {
   try {
     //getting array of object
-    let productsInCart = await axios.put(
-      `api/cart/removeproduct/${orderId}/${productId}`
-    )
-    dispatch(createCart(productsInCart.data))
+    let productsInCart = await axios.delete(`api/cart/${orderId}/${productId}`)
+    dispatch(updatedCart(productsInCart.data))
   } catch (error) {
     console.error(error)
   }
 }
 
-//PUT api/cart/decrementproduct/:orderId/:productId
+//PUT api/cart/product/:orderId/:productId
 export const decrement = (orderId, productId) => async dispatch => {
   try {
-    const {data} = await axios.put(
-      `api/cart/decrementproduct/${orderId}/${productId}`
-    )
-    dispatch(decremented(data))
-    dispatch(createCart(data))
+    const {data} = await axios.put(`api/cart/product/${orderId}/${productId}`)
+    dispatch(updatedCart(data))
   } catch (error) {
     console.log(error)
   }
@@ -81,7 +61,7 @@ export const decrement = (orderId, productId) => async dispatch => {
 export const completeOrder = orderId => {
   return async dispatch => {
     try {
-      const order = await axios.put(`/api/cart/submitorder/${orderId}`)
+      const order = await axios.put(`/api/cart/${orderId}`)
       dispatch(completedOrder(order))
       history.push('/checkout')
     } catch (error) {
@@ -96,14 +76,8 @@ const initialState = {}
 // Reducer
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
+    case UPDATE_CART:
       return action.order
-    case CREATE_CART:
-      return action.activeOrder
-    case DECREMENT:
-      return action.decrementedProduct
-    case DELETE_PRODUCT:
-      return action.productsInCart
     case COMPLETE_ORDER:
       state = {}
       return state
