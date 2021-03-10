@@ -6,7 +6,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
   deleteProduct
-} from '../store/localCart'
+} from '../../store/redux/localCart'
 
 class LocalCart extends React.Component {
   render() {

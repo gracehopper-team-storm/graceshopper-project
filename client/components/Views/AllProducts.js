@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getProducts} from '../store/allProducts'
+import {getProducts} from '../../store/redux/allProducts'
 import ReactPaginate from 'react-paginate'
 
 class AllProducts extends React.Component {

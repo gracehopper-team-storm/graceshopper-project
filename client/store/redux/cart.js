@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../history'
+import history from '../../history'
 
 // Action Type
 const UPDATE_CART = 'UPDATE_CART'

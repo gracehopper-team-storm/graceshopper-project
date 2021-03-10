@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteProduct} from '../store/cart'
+import {deleteProduct} from '../../store/redux/cart'
 
 const DeleteButton = props => {
   return (

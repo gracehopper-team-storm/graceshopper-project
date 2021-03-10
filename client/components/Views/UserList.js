@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers} from '../store/allUsers'
+import {fetchUsers} from '../../store/redux/allUsers'
 
 export const UserList = props => {
   let {users, getUsers} = props
