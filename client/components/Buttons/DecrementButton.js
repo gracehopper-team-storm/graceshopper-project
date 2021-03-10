@@ -1,17 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProduct} from '../store/cart'
+import {decrement} from '../../store/redux/cart'
 
-const IncrementButton = props => {
+const DecrementButton = props => {
   return (
     <div>
       <button
         type="button"
         onClick={() => {
-          props.incrementProduct(props.orderId, props.product.id)
+          props.decrementProduct(props.orderId, props.product.id)
         }}
       >
-        Increment
+        Decrement
       </button>
     </div>
   )
@@ -23,9 +23,9 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  incrementProduct: (orderId, productId) => {
-    dispatch(addProduct(orderId, productId))
+  decrementProduct: (orderId, productId) => {
+    dispatch(decrement(orderId, productId))
   }
 })
 
-export default connect(mapState, mapDispatch)(IncrementButton)
+export default connect(mapState, mapDispatch)(DecrementButton)
