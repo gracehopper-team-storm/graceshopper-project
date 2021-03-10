@@ -21,7 +21,6 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-//PUT api/cart/addproduct/:orderId/:productId
 //POST api/cart/:orderId/:productId
 router.post('/:orderId/:productId', async (req, res, next) => {
   try {
@@ -49,7 +48,6 @@ router.post('/:orderId/:productId', async (req, res, next) => {
   }
 })
 
-//PUT api/cart/removeroduct/:orderId/:productId
 //DELETE api/cart/:orderId/:productId
 router.delete('/:orderId/:productId', async (req, res, next) => {
   try {
@@ -66,7 +64,7 @@ router.delete('/:orderId/:productId', async (req, res, next) => {
   }
 })
 
-//PUT api/cart/decrementproduct/:orderId/:productId
+//PUT api/cart/product/:orderId/:productId
 router.put('/product/:orderId/:productId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findByPk(req.params.orderId)
@@ -90,8 +88,8 @@ router.put('/product/:orderId/:productId', async (req, res, next) => {
   }
 })
 
-//PUT /api/cart/submitorder/:orderId
-router.put('/submitorder/:orderId', async (req, res, next) => {
+//PUT /api/cart/:orderId
+router.put('/:orderId', async (req, res, next) => {
   try {
     const activeOrder = await Order.findByPk(req.params.orderId)
     res.status(200).send(await activeOrder.update({status: 'completed'}))
