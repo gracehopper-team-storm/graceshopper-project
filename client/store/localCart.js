@@ -77,4 +77,9 @@ const localCartReducer = (state = initialState, action) => {
   }
 }
 
+<<<<<<< HEAD
+=======
+// saveState(localCartReducer)
+
+>>>>>>> master
 export default localCartReducer

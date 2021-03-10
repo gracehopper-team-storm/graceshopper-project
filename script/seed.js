@@ -9,37 +9,43 @@ async function seedUsers() {
     firstName: 'Natalie',
     lastName: 'Lane',
     email: 'natalie.lane@gracehopper.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Kade',
     lastName: 'Cahe',
     email: 'kadecahe@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Jamie',
     lastName: 'Eunice',
     email: 'jamieecarrasquillo@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Mollie',
     lastName: 'Davidson-Blue',
     email: 'med1198@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Andrea',
     lastName: 'Crabtree',
     email: 'andreancrabtree@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
   await User.create({
     firstName: 'Selina',
     lastName: 'Byeon',
     email: 'seonaebyeon1@gmail.com',
-    password: 'ilovedogs123!'
+    password: 'ilovedogs123!',
+    isAdmin: true
   })
 
   for (let i = 0; i < 25; i++) {
@@ -128,7 +134,8 @@ async function seedProducts() {
   for (let i = 0; i < 100; i++) {
     let name = faker.commerce.productName()
     let description = faker.commerce.productDescription()
-    let image = faker.image.nature()
+    let image =
+      'https://i.etsystatic.com/13346155/r/il/1a3547/1602266077/il_1588xN.1602266077_nrem.jpg'
     let price = faker.commerce.price(1, 100, 2)
     let inventory = faker.random.number()
 

@@ -2,12 +2,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+<<<<<<< HEAD
 import {findOrCreateCart} from '../store/cart'
 import LocalCart from './LocalCart'
+=======
+import DeleteButton from './DeleteButton'
+import IncrementButton from './IncrementButton'
+import DecrementButton from './DecrementButton'
+import {completeOrder, findOrCreateCart} from '../store/cart'
+import SubmitOrder from './SubmitOrder'
+>>>>>>> master
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userId !== prevProps.userId) {
+      this.props.findOrCreateCart(this.props.userId)
+    }
+    if (!this.props.order.products && prevProps.order.products) {
       this.props.findOrCreateCart(this.props.userId)
     }
   }
@@ -15,7 +26,6 @@ class Cart extends React.Component {
   render() {
     const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
-    console.log('products', products)
 
     return orderId ? (
       <div id="cart">
@@ -27,41 +37,23 @@ class Cart extends React.Component {
             products.map(item => (
               <div key={item.id} id="item-container">
                 <div id="item">
-                  <img src={item.image} alt={item.name} />
                   <Link to={`/allproducts/${item.id}`}>
-                    <h4>{item.name}</h4>
+                    <img src={item.image} alt={item.name} width="200px" />
                   </Link>
+                  <h5>{item.name}</h5>
                   <h5>{item.price}</h5>
                 </div>
                 <div id="quantity-change">
-                  <form>
-                    <button
-                      id="increase"
-                      onClick={() => {
-                        this.props.increaseQuantity(orderId, item.id)
-                      }}
-                    />
-                    {item.quantity}
-                    <button
-                      id="decrease"
-                      onClick={() => {
-                        this.props.decreaseQuantity(orderId, item.id)
-                      }}
-                    />
-                    <button
-                      id="delete-product"
-                      onClick={() => {
-                        this.props.deleteProduct(orderId, item.id)
-                      }}
-                    >
-                      Delete Item
-                    </button>
-                  </form>
+                  <h5>{item.Order_Product.quantity}</h5>
+                  <IncrementButton product={item} />
+                  <DecrementButton product={item} />
+                  <DeleteButton product={item} />
                 </div>
               </div>
             ))
           )}
         </div>
+        <SubmitOrder />
       </div>
     ) : (
       <LocalCart />
@@ -78,10 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    findOrCreateCart: userId => dispatch(findOrCreateCart(userId)),
-    increaseQuantity: () => dispatch(increaseQuantity(orderId, productId)),
-    decreaseQuantity: () => dispatch(decreaseQuantity(orderId, productId)),
-    deleteProduct: () => dispatch(deleteProduct(orderId, productId))
+    findOrCreateCart: userId => dispatch(findOrCreateCart(userId))
   }
 }
 

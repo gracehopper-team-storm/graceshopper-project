@@ -1,13 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {addProduct, findOrCreateCart} from './../store/cart'
 
 class AddToCart extends React.Component {
   componentDidMount() {
-    console.log('PROPS', this.props)
-    console.log('CART', this.props.cart)
-
     this.props.getCart(this.props.user.id)
   }
 
@@ -15,6 +11,7 @@ class AddToCart extends React.Component {
     return (
       <div>
         <button
+          type="button"
           onClick={() =>
             this.props.addProduct(this.props.cart.orderId, this.props.productId)
           }
