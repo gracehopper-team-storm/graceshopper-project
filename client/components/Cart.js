@@ -2,10 +2,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import LocalCart from './LocalCart'
 import DeleteButton from './DeleteButton'
 import IncrementButton from './IncrementButton'
 import DecrementButton from './DecrementButton'
-import {completeOrder, findOrCreateCart} from '../store/cart'
+import {findOrCreateCart} from '../store/cart'
 import SubmitOrder from './SubmitOrder'
 
 class Cart extends React.Component {
@@ -22,7 +23,7 @@ class Cart extends React.Component {
     const products = this.props.order.products ? this.props.order.products : []
     const orderId = this.props.order.id
 
-    return (
+    return orderId ? (
       <div id="cart">
         <h2>Cart</h2>
         <div id="order-container">
@@ -50,6 +51,8 @@ class Cart extends React.Component {
         </div>
         <SubmitOrder />
       </div>
+    ) : (
+      <LocalCart />
     )
   }
 }

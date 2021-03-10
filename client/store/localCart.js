@@ -1,22 +1,34 @@
 //action type
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-const GET_CART = 'GET_CART'
+const ADD_GUEST_PRODUCT = 'ADD_GUEST_PRODUCT'
+const GET_GUEST_CART = 'GET_GUEST_CART'
+const INCREMENT_GUEST_PRODUCT = 'INCREMENT_GUEST_PRODUCT'
+const DECREMENT_GUEST_PRODUCT = 'DECREMENT_GUEST_PRODUCT'
+const DELETE_GUEST_PRODUCT = 'DELETE_GUEST_PRODUCT'
 
 //ACTION CREATORs
-const addProduct = product => ({
-  type: ADD_PRODUCT,
+export const addProduct = product => ({
+  type: ADD_GUEST_PRODUCT,
   product
 })
 
-const removeProduct = product => ({
-  type: REMOVE_PRODUCT,
-  product
-})
-
-const gotCart = cart => ({
-  type: GET_CART,
+export const gotCart = cart => ({
+  type: GET_GUEST_CART,
   cart
+})
+
+export const increaseQuantity = productId => ({
+  type: INCREMENT_GUEST_PRODUCT,
+  productId
+})
+
+export const decreaseQuantity = productId => ({
+  type: DECREMENT_GUEST_PRODUCT,
+  productId
+})
+
+export const deleteProduct = productId => ({
+  type: DELETE_GUEST_PRODUCT,
+  productId
 })
 
 const initialState = []
@@ -24,17 +36,31 @@ const initialState = []
 //reducer
 const localCartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT:
+    case ADD_GUEST_PRODUCT:
+      action.product.quantity = 1
       return [...state, action.product]
-    case GET_CART:
+    case INCREMENT_GUEST_PRODUCT:
+      console.log('incrementing prod')
+      //look for product in state and increment quantity
+      return state.filter(
+        product =>
+          product.id === action.productId ? product.quantity++ : product
+      )
+    case DECREMENT_GUEST_PRODUCT:
+      return state.filter(
+        product =>
+          product.id === action.productId && product.quantity > 1
+            ? product.quantity--
+            : product
+      )
+    case GET_GUEST_CART:
       return action.cart
-    case REMOVE_PRODUCT:
-      return state.filter(product => product !== action.product)
+    case DELETE_GUEST_PRODUCT:
+      console.log('deleting product')
+      return state.filter(product => product.id !== action.productId)
     default:
       return state
   }
 }
-
-// saveState(localCartReducer)
 
 export default localCartReducer

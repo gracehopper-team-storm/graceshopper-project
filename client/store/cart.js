@@ -91,7 +91,7 @@ export const completeOrder = orderId => {
 }
 
 // Initial State
-let initialState = {}
+const initialState = {}
 
 // Reducer
 const cartReducer = (state = initialState, action) => {
