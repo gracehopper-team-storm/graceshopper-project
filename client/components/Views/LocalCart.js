@@ -59,7 +59,7 @@ class LocalCart extends React.Component {
               </div>
             ))
           ) : (
-            <h2>empty cart on local </h2>
+            <h3>Empty Cart</h3>
           )}
         </div>
       </div>
