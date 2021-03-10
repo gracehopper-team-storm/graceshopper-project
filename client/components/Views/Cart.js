@@ -10,7 +10,7 @@ import {findOrCreateCart} from '../../store/redux/cart'
 import SubmitOrder from '../Buttons/SubmitOrder'
 
 class Cart extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       this.props.findOrCreateCart(this.props.userId)
     }
@@ -21,7 +21,7 @@ class Cart extends React.Component {
 
   render() {
     const products = this.props.order.products ? this.props.order.products : []
-    const orderId = this.props.order.orderId
+    const userId = this.props.userId
 
     return (
       <div className="cart">
