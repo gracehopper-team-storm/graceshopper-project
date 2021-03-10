@@ -23,7 +23,7 @@ class Cart extends React.Component {
     const products = this.props.order.products ? this.props.order.products : []
     const userId = this.props.userId
 
-    return (
+    return userId ? (
       <div className="cart">
         <h2>Cart</h2>
         <div>
@@ -56,7 +56,9 @@ class Cart extends React.Component {
           )}
         </div>
         <SubmitOrder />
-        ) : (
+      </div>
+    ) : (
+      <div>
         <LocalCart />
       </div>
     )
