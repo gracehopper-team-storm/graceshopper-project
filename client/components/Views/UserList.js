@@ -15,17 +15,33 @@ export const UserList = props => {
   )
 
   return users.length > 0 ? (
-    users.map(user => (
-      <div key={user.id}>
-        <h3>
-          {user.firstName} {user.lastName}
-        </h3>
-        <p>{user.email}</p>
-        <p>{user.id}</p>
-      </div>
-    ))
+    <div className="container-sm">
+      <table className="table">
+        <thead className="tableHead">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        {users.map(user => (
+          // <div className="userList" key={user.id}>
+          <tbody>
+            <tr>
+              <th scope="row">{user.id}</th>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.email}</td>
+            </tr>
+          </tbody>
+          // </div>
+        ))}
+      </table>
+    </div>
   ) : (
-    <h3>Getting Users</h3>
+    // </div>
+    <h3>Getting users...</h3>
   )
 }
 

@@ -11,13 +11,20 @@ class SubmitOrder extends React.Component {
   handleClick() {
     if (this.props.order.products.length > 0) {
       this.props.completeOrder(this.props.order.orderId)
+    } else {
+      alert('Your cart is empty!')
     }
   }
 
   render() {
     return (
-      <div>
-        <button id="submit" onClick={this.handleClick}>
+      <div className="submitOrder">
+        <button
+          type="button"
+          className="btn btn-outline-dark"
+          id="submit"
+          onClick={this.handleClick}
+        >
           Submit Order
         </button>
       </div>

@@ -9,7 +9,7 @@ import {auth} from '../../store'
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
   return (
-    <div className="form">
+    <div className="formSignUp">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label>
@@ -37,14 +37,14 @@ const AuthForm = props => {
           <input name="password" type="password" id="input" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <button className="btn btn-outline-dark" type="submit">
+            {displayName}
+          </button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <br />
-      <span>
-        <a href="/auth/google">{displayName} with Google</a>
-      </span>
+      <span>{/* <a href="/auth/google">{displayName} with Google</a> */}</span>
     </div>
   )
 }

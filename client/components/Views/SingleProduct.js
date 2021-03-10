@@ -13,13 +13,13 @@ class SingleProduct extends React.Component {
     const user = this.props.user ? this.props.user : {}
     return (
       <div>
-        <div id="singleProd-image">
-          <img src={product.image} width="500px" />
-        </div>
-        <div id="singleProd-info">
+        <div className="single">
           <h2>{product.name}</h2>
-          <h2>{product.price}</h2>
+          <div>
+            <img src={product.image} width="500px" />
+          </div>
           <p>{product.description}</p>
+          <h3>${product.price}</h3>
 
           {!user.id ? (
             <button

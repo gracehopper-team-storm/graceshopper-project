@@ -23,36 +23,42 @@ class Cart extends React.Component {
     const products = this.props.order.products ? this.props.order.products : []
     const userId = this.props.userId
 
-    return userId ? (
-      <div id="cart">
+    return (
+      <div className="cart">
         <h2>Cart</h2>
-        <div id="order-container">
+        <div>
           {!products.length || products === undefined ? (
-            <h3>Empty Cart</h3>
+            <p>Nothing to show up here.</p>
           ) : (
             products.map(item => (
               <div key={item.id} id="item-container">
-                <div id="item">
-                  <Link to={`/allproducts/${item.id}`}>
-                    <img src={item.image} alt={item.name} width="200px" />
-                  </Link>
-                  <h5>{item.name}</h5>
-                  <h5>{item.price}</h5>
-                </div>
-                <div id="quantity-change">
-                  <h5>{item.Order_Product.quantity}</h5>
-                  <IncrementButton product={item} />
+                {/* <div className="product"> */}
+                <Link to={`/allproducts/${item.id}`}>
+                  <img src={item.image} alt={item.name} width="200px" />
+                </Link>
+                <h6>{item.name}</h6>
+                <div className="price">${item.price}</div>
+                {/* </div> */}
+                {/* <div> */}
+
+                <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 w-25">
                   <DecrementButton product={item} />
-                  <DeleteButton product={item} />
+                  <h6 className="productQuantity">
+                    {item.Order_Product.quantity}
+                  </h6>
+                  <IncrementButton product={item} />
                 </div>
+
+                <DeleteButton product={item} />
+                {/* </div> */}
               </div>
             ))
           )}
         </div>
         <SubmitOrder />
+        ) : (
+        <LocalCart />
       </div>
-    ) : (
-      <LocalCart />
     )
   }
 }
