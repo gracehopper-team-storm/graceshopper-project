@@ -2,10 +2,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  deleteProduct
+} from '../store/localCart'
 
 class LocalCart extends React.Component {
   render() {
-    const products = this.props.order.products ? this.props.order.products : []
+    const products = this.props.order ? this.props.order : []
     console.log('products', products)
 
     return (
@@ -29,14 +34,18 @@ class LocalCart extends React.Component {
                       onClick={() => {
                         this.props.increaseQuantity(item.id)
                       }}
-                    />
+                    >
+                      +
+                    </button>
                     {item.quantity}
                     <button
                       id="decrease"
                       onClick={() => {
                         this.props.decreaseQuantity(item.id)
                       }}
-                    />
+                    >
+                      -
+                    </button>
                     <button
                       id="delete-product"
                       onClick={() => {
@@ -50,7 +59,7 @@ class LocalCart extends React.Component {
               </div>
             ))
           ) : (
-            <h2>empty cart</h2>
+            <h2>empty cart on local </h2>
           )}
         </div>
       </div>

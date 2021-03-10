@@ -3,6 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {findOrCreateCart} from '../store/cart'
+import LocalCart from './LocalCart'
 
 class Cart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
@@ -16,7 +17,7 @@ class Cart extends React.Component {
     const orderId = this.props.order.id
     console.log('products', products)
 
-    return (
+    return orderId ? (
       <div id="cart">
         <h2>Cart</h2>
         <div id="order-container">
@@ -62,6 +63,8 @@ class Cart extends React.Component {
           )}
         </div>
       </div>
+    ) : (
+      <LocalCart />
     )
   }
 }
