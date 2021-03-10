@@ -139,7 +139,7 @@ span {
   display: flex;
 }
 
-.singleProduct p {
+.single p {
   font-size: 18px;
   font-family: 'Optima';
   margin-left: auto;
@@ -148,16 +148,25 @@ span {
   margin-top: 35px;
 }
 
-.singleProduct h4 {
+.single h4 {
   font-size: 18px;
   font-family: 'Optima';
   text-align: center;
 }
 
-.singleProduct img {
+.single img {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.single h3 {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  font-size: 18px;
+  font-family: 'Optima';
+  text-align: center;
 }
 
 .single h2 {
